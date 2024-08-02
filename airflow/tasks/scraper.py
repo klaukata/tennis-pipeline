@@ -20,42 +20,46 @@ def get_page_src() -> str:
         service = chrome_service,
         options = chrome_options
     )
+    
+    try:
+        driver.set_window_size(1980, 1080)
+        url = 'https://www.ultimatetennisstatistics.com/goatList'
+        driver.get(url)
 
-    driver.set_window_size(1980, 1080)
-    url = 'https://www.ultimatetennisstatistics.com/goatList'
-    driver.get(url)
+        btn_cookies_selector = "button.fc-button.fc-cta-consent.fc-primary-button"
+        btn_n_players_selector = "button.btn.btn-default.dropdown-toggle"
+        li_all_players_selector = "ul.dropdown-menu.pull-right > :last-child"
 
-    btn_cookies_selector = "button.fc-button.fc-cta-consent.fc-primary-button"
-    btn_n_players_selector = "button.btn.btn-default.dropdown-toggle"
-    li_all_players_selector = "ul.dropdown-menu.pull-right > :last-child"
+        # agree to cookies
+        WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, btn_cookies_selector))
+        )
 
-    # agree to cookies
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, btn_cookies_selector))
-    )
+        btn_cookies = driver.find_element(By.CSS_SELECTOR, btn_cookies_selector)
+        btn_cookies.click()
 
-    btn_cookies = driver.find_element(By.CSS_SELECTOR, btn_cookies_selector)
-    btn_cookies.click()
+        # show all player stats
+        WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, btn_n_players_selector))
+        )
+        btn_n_players = driver.find_element(By.CSS_SELECTOR, btn_n_players_selector)
+        btn_n_players.click()
 
-    # show all player stats
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, btn_n_players_selector))
-    )
-    btn_n_players = driver.find_element(By.CSS_SELECTOR, btn_n_players_selector)
-    btn_n_players.click()
+        WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, li_all_players_selector))
+        )
+        li_all_players = driver.find_element(By.CSS_SELECTOR, li_all_players_selector)
+        li_all_players.click()
 
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, li_all_players_selector))
-    )
-    li_all_players = driver.find_element(By.CSS_SELECTOR, li_all_players_selector)
-    li_all_players.click()
+        # table extraction
+        WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, '//tr[@data-row-id="20"]'))
+        )
 
-    # table extraction
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, '//tr[@data-row-id="20"]'))
-    )
-
-    return driver.page_source
+        return driver.page_source
+    
+    finally:
+        driver.quit()
 
 def extract_table(html: str) -> str:
     soup = BeautifulSoup(html, 'lxml')
