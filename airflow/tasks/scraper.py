@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+import pandas as pd 
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
@@ -74,5 +75,9 @@ for player_html in players_html:
         player.append(cell)
     players.append(player)
 
+df = pd.DataFrame(
+    columns = col_names,
+    data = players 
+)
 
 driver.quit()
