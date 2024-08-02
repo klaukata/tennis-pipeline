@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-import time
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
@@ -49,9 +48,9 @@ li_all_players = driver.find_element(By.CSS_SELECTOR, li_all_players_selector)
 li_all_players.click()
 
 # table extraction
-# WebDriverWait(driver, 5).until(
-#     EC.presence_of_element_located((By.XPATH, '//tr[@data-row-id="20"]'))
-# )
+WebDriverWait(driver, 5).until(
+    EC.presence_of_element_located((By.XPATH, '//tr[@data-row-id="20"]'))
+)
 
 soup = BeautifulSoup(driver.page_source, 'lxml')
 table = soup.find('table')
@@ -73,7 +72,7 @@ for player_html in players_html:
     for cell_html in player_html:
         cell = cell_html.getText()
         player.append(cell)
-    print(player)
+    players.append(player)
 
-time.sleep(10)
+
 driver.quit()
