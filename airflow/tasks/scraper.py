@@ -48,6 +48,22 @@ WebDriverWait(driver, 5).until(
 li_all_players = driver.find_element(By.CSS_SELECTOR, li_all_players_selector)
 li_all_players.click()
 
+# table extraction
+# WebDriverWait(driver, 5).until(
+#     EC.presence_of_element_located((By.XPATH, '//tr[@data-row-id="20"]'))
+# )
+
+soup = BeautifulSoup(driver.page_source, 'lxml')
+table = soup.find('table')
+
+thead = table.find('thead')
+col_names_html = thead.find_all('span', {'class': 'text'})
+col_names = []
+
+for col_name_html in col_names_html:
+    col_name = col_name_html.getText()
+    col_names.append(col_name)
+
 
 time.sleep(10)
 driver.quit()
