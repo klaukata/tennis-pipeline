@@ -10,7 +10,7 @@ import time
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
-# chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless')
 
 chrome_service = Service(ChromeDriverManager().install())
 
@@ -19,7 +19,7 @@ driver = webdriver.Chrome(
     options = chrome_options
 )
 
-driver.maximize_window()
+driver.set_window_size(1980, 1080)
 url = 'https://www.ultimatetennisstatistics.com/goatList'
 driver.get(url)
 
@@ -64,6 +64,16 @@ for col_name_html in col_names_html:
     col_name = col_name_html.getText()
     col_names.append(col_name)
 
+tbody = table.find('tbody')
+players_html = tbody.find_all('tr')
+players = []
+
+for player_html in players_html:
+    player = []
+    for cell_html in player_html:
+        cell = cell_html.getText()
+        player.append(cell)
+    print(player)
 
 time.sleep(10)
 driver.quit()
