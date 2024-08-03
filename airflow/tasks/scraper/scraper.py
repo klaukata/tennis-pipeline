@@ -23,7 +23,6 @@ def init_driver():
     return driver
 
 def get_page_src(driver) -> str:
-    
     try:
         driver.set_window_size(1980, 1080)
         url = 'https://www.ultimatetennisstatistics.com/goatList'
@@ -101,7 +100,6 @@ def create_df(cols: list, data: list):
     )
     return df
 
-
 if __name__ == '__main__':
     driver = init_driver()
     page_src = get_page_src(driver)
@@ -109,3 +107,4 @@ if __name__ == '__main__':
     columns = extract_col_names(table)
     data = extract_players(table)
     df = create_df(columns, data)
+    df.to_csv('/tmp/bronze_data.csv')

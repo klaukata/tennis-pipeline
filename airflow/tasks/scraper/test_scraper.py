@@ -20,6 +20,11 @@ class TestScraper(unittest.TestCase):
             options = options_val
         )
 
+    # TODO - test 4 widow size
+    # TODO - test 4 get page source == html
+    # TODO - test 4 correctly indentified html emements to click
+    # TODO - output of get_page_src == html
+    # TODO - output for extract_table == table html
 
 
 if __name__ == "__main__":
