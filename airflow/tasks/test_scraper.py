@@ -3,7 +3,6 @@ import scraper
 from unittest.mock import MagicMock, patch
 
 class TestScraper(unittest.TestCase):
-
     @patch('scraper.Options')
     @patch('scraper.Service')
     @patch('scraper.webdriver.Chrome')
@@ -14,15 +13,12 @@ class TestScraper(unittest.TestCase):
         options_val = mock_options.return_value
         service_val = mock_service.return_value
 
-        scraper.get_page_src()
+        scraper.init_driver()
 
         mock_driver.assert_called_once_with(
             service = service_val,
             options = options_val
         )
-
-    
-
 
 
 

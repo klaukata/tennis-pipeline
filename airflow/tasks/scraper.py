@@ -8,8 +8,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd 
 
-
-def get_page_src() -> str:
+def init_driver():
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--headless')
@@ -20,6 +19,10 @@ def get_page_src() -> str:
         service = chrome_service,
         options = chrome_options
     )
+    
+    return driver
+
+def get_page_src(driver) -> str:
     
     try:
         driver.set_window_size(1980, 1080)
@@ -91,18 +94,18 @@ def extract_players(table: str) -> list:
 
     return players
 
-def df(cols: list, data: list):
+def create_df(cols: list, data: list):
     df = pd.DataFrame(
         columns = cols,
         data = data 
     )
-
     return df
 
 
 if __name__ == '__main__':
-    page_src = get_page_src()
+    driver = init_driver()
+    page_src = get_page_src(driver)
     table = extract_table(page_src)
     columns = extract_col_names(table)
     data = extract_players(table)
-    df(columns, data)
+    df = create_df(columns, data)
