@@ -22,12 +22,14 @@ def init_driver():
     
     return driver
 
+def fetch_website(driver):
+    driver.set_window_size(1980, 1080)
+    url = 'https://www.ultimatetennisstatistics.com/goatList'
+    driver.get(url)
+    return driver
+
 def get_page_src(driver) -> str:
     try:
-        driver.set_window_size(1980, 1080)
-        url = 'https://www.ultimatetennisstatistics.com/goatList'
-        driver.get(url)
-
         btn_cookies_selector = "button.fc-button.fc-cta-consent.fc-primary-button"
         btn_n_players_selector = "button.btn.btn-default.dropdown-toggle"
         li_all_players_selector = "ul.dropdown-menu.pull-right > :last-child"
@@ -101,10 +103,11 @@ def create_df(cols: list, data: list):
     return df
 
 if __name__ == '__main__':
-    driver = init_driver()
+    driver_empty = init_driver()
+    driver = fetch_website(driver_empty)
     page_src = get_page_src(driver)
-    table = extract_table(page_src)
-    columns = extract_col_names(table)
-    data = extract_players(table)
-    df = create_df(columns, data)
-    df.to_csv('/tmp/bronze_data.csv')
+    # table = extract_table(page_src)
+    # columns = extract_col_names(table)
+    # data = extract_players(table)
+    # df = create_df(columns, data)
+    # df.to_csv('/tmp/bronze_data.csv')
