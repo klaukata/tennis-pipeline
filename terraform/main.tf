@@ -10,3 +10,5 @@ terraform {
 # credentials 4 connecting to an acc
 provider "aws" {}
 
+# TODO: aws s3 alert
+
