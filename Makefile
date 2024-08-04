@@ -1,6 +1,6 @@
 help:
 		@echo " infra		Creates an AWS infrastructure"
-		@echo " outputs		Extracts terraform outputs and saves them in /tf-outputs.env"
+		@echo " outputs		Extracts terraform outputs and saves them in /tf-outputs.json"
 		@echo " test		Tests scraper.py"
 
 
