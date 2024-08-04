@@ -19,7 +19,7 @@ def init_driver():
         service = chrome_service,
         options = chrome_options
     )
-    
+
     return driver
 
 def fetch_website(driver):
@@ -106,8 +106,8 @@ if __name__ == '__main__':
     driver_empty = init_driver()
     driver = fetch_website(driver_empty)
     page_src = get_page_src(driver)
-    # table = extract_table(page_src)
-    # columns = extract_col_names(table)
-    # data = extract_players(table)
-    # df = create_df(columns, data)
-    # df.to_csv('/tmp/bronze_data.csv')
+    table = extract_table(page_src)
+    columns = extract_col_names(table)
+    data = extract_players(table)
+    df = create_df(columns, data)
+    df.to_csv('/tmp/bronze_data.csv')
