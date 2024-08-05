@@ -71,7 +71,10 @@ class TestScraper(unittest.TestCase):
         table = scraper.extract_table(html)
         self.assertEqual(str(table), '<table></table>')
     
-
+    def test_extract_table_none(self):
+        html = '<html></html>'
+        table = scraper.extract_table(html)
+        self.assertIsNone(table)
 
     # TODO - output for extract_table == table html
 
