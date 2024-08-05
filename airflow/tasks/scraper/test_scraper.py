@@ -67,16 +67,28 @@ class TestScraper(unittest.TestCase):
         m_driver.quit.assert_called_once()
 
     def test_extract_table(self):
+        '''
+        If theres a table element inside a parsed html, 
+        return it
+        '''
         html = '<html><table></table></html>'
         table = scraper.extract_table(html)
         self.assertEqual(str(table), '<table></table>')
     
     def test_extract_table_none(self):
+        '''
+        If theres no table element inside a parsed html, 
+        it should return None
+        '''
         html = '<html></html>'
         table = scraper.extract_table(html)
         self.assertIsNone(table)
 
-    # TODO - output for extract_table == table html
+
+    # TODO - see if it finds thead
+    # TODO - see if it'll return a prper array 
+    # TODO - finds tbody, and returns what it should
+    # TODO - create_df
 
 
 if __name__ == "__main__":
