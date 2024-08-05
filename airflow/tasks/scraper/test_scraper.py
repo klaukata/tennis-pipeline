@@ -1,5 +1,6 @@
 import unittest
 import scraper
+
 from unittest.mock import MagicMock, patch
 
 class TestScraper(unittest.TestCase):
@@ -37,10 +38,41 @@ class TestScraper(unittest.TestCase):
         result.set_window_size.assert_called_once_with(1980, 1080)
         result.get.assert_called_once_with(self.url)
         self.assertEqual(result, m_driver)
+    
+    @patch('scraper.By')
+    def test_get_page_src(self, mock_by):
+        """
+        Tests:
+            1. Certain html elements were identified
+            2. If a func returns drivers page_source 
+            3. If driver was disposed of
+        """
+        m_driver = MagicMock()
+        m_driver.page_source = '<html></html>'
+        result = scraper.get_page_src(m_driver)
+        
+        m_driver.find_element.assert_any_call(
+            mock_by.CSS_SELECTOR,
+            "button.fc-button.fc-cta-consent.fc-primary-button"
+        )
+        m_driver.find_element.assert_any_call(
+            mock_by.CSS_SELECTOR,
+            "button.btn.btn-default.dropdown-toggle"
+        )
+        m_driver.find_element.assert_any_call(
+            mock_by.CSS_SELECTOR,
+            "ul.dropdown-menu.pull-right > :last-child"
+        )
+        self.assertEqual(result, '<html></html>')
+        m_driver.quit.assert_called_once()
 
-    # TODO - test 4 get page source == html
-    # TODO - test 4 correctly indentified html emements to click
-    # TODO - output of get_page_src == html
+    def test_extract_table(self):
+        html = '<html><table></table></html>'
+        table = scraper.extract_table(html)
+        self.assertEqual(str(table), '<table></table>')
+    
+
+
     # TODO - output for extract_table == table html
 
 
