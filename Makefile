@@ -5,8 +5,8 @@ help:
 
 
 infra:
-		terraform '-chdir=terraform/' init;
-		terraform '-chdir=terraform/' apply; 
+		terraform '-chdir=terraform/' init
+		terraform '-chdir=terraform/' apply 
 
 outputs:
 		chmod +x shell_scripts/outputs.sh
@@ -14,5 +14,7 @@ outputs:
 
 test:
 		pytest
+
+# TODO - rm a /tmp/data.csv
 
 	
