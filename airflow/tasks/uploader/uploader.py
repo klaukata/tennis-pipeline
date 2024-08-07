@@ -1,5 +1,6 @@
 import boto3
 import json
+from dotenv import load_dotenv, set_key
 
 def get_prefix(json_file: str) -> str:
     try:
@@ -16,6 +17,13 @@ def find_bucket_names(prefix: str) -> list:
     matching = [name for name in bucket_names if name.startswith(prefix)]
     return(matching)
 
+def save_value_to_dotenv(file_path: str, key: str, value):
+    load_dotenv(file_path)
+    try: 
+        set_key(file_path, key, value)
+    except Exception as e:
+        print(f"Can't save a given env var because of error: {e}")
+
 def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
     s3 = boto3.resource('s3')
     try:
@@ -26,6 +34,7 @@ def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
 if __name__ == '__main__':
     prefix = get_prefix('tf-outputs.json')
     bucket_name = find_bucket_names(prefix)[0]
+    save_value_to_dotenv('terraform/.env', 'BUCKET_NAME', bucket_name)
     upload_to_s3(
         bucket_name = bucket_name,
         file_name = 'bronze_data.csv',
