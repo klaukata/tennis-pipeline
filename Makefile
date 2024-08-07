@@ -4,13 +4,16 @@ help:
 		@echo " test		Tests scraper.py"
 
 
-infra:
+s3:
 		terraform '-chdir=terraform/' init
-		terraform '-chdir=terraform/' apply 
+		terraform '-chdir=terraform/' apply -target=aws_s3_bucket.raw_data
 
 outputs:
 		chmod +x shell_scripts/outputs.sh
 		shell_scripts/outputs.sh
+
+tf:
+		terraform '-chdir=terraform/' apply
 
 test:
 		pytest
