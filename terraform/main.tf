@@ -4,11 +4,21 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    dotenv = {
+      source = "jrhouston/dotenv"
+      version = "~> 1.0"
+    }
   }
 }
 
-# credentials 4 connecting to an acc
+# connecting to an acc
 provider "aws" {}
 
-# TODO: aws s3 alert
+# reading .env variables from a file '.env'
+provider "dotenv" {}
+
+data "dotenv" "dev_config" {
+  filename = ".env"
+}
+
 
