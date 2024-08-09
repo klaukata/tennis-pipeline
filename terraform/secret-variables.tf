@@ -6,13 +6,7 @@ variable "snowflake_account" {
   default       = ""
 }
 
-variable "snowflake_region" {
-  description   = "The AWS region of the Snowflake account"
-  type          = string
-  default       = ""
-}
-
-variable "snowflake_username" {
+variable "snowflake_user" {
   description   = "The username for the Snowflake user"
   sensitive     = true
   type          = string
