@@ -7,3 +7,4 @@ Set up (so far):
 3. `make outputs`
 4. run .py scripts (saving scraped data do s3 bucket)
 5. `make ft` (create a cloudwatch alarm)
+6. add your snowflake credentials to *terraform/secret-variables.tf*
