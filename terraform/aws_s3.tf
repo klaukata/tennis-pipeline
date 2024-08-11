@@ -1,7 +1,9 @@
+# ____________BUCKET____________
 resource "aws_s3_bucket" "raw_data" {
     bucket_prefix = var.s3_prefix
 }
 
+# ____________CLOUDWATCH ALARM____________
 resource "aws_cloudwatch_metric_alarm" "size_alarm" {
     alarm_name =    "bucket_size_alarm"
     alarm_description = "Alarm when S3 bucket size exceeds "
@@ -19,6 +21,7 @@ resource "aws_cloudwatch_metric_alarm" "size_alarm" {
     alarm_actions = [aws_sns_topic.size_reached.arn]
 }
 
+# ____________SNS TOPIC____________
 resource "aws_sns_topic" "size_reached" {
     name="bucket_size_topic"
 }
