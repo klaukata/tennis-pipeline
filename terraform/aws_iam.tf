@@ -1,6 +1,6 @@
 # ____________TRUST POLICY____________
 
-# data source for an acces to authorized account id
+# data source for an access to authorized account id
 data "aws_caller_identity" "current" {}
 
 # trust policy = who can assume the 'snowflake_uploader' role
