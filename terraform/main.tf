@@ -12,6 +12,10 @@ terraform {
       source = "Snowflake-Labs/snowflake"
       version = "0.94.1"
     }
+    snowsql = {
+      source = "aidanmelen/snowsql"
+      version = "1.3.3"
+    }
   }
 }
 
@@ -25,7 +29,7 @@ data "dotenv" "dev_config" {
   filename = ".env"
 }
 
-
+# connecting to a snowflake acc
 provider "snowflake" {
   account   = var.snowflake_account
   user      = var.snowflake_user
@@ -33,9 +37,7 @@ provider "snowflake" {
   role      = var.snowflake_user_role
 }
 
-resource "snowflake_schema" "test_schema" {
-  name     = "test_schema"
-  database = "db"
+provider "snowsql" {
+  account   = var.snowflake_account
+  username  = var.snowflake_user
 }
-
-
