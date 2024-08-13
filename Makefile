@@ -16,6 +16,9 @@ outputs:
 tf:
 		terraform '-chdir=terraform/' apply
 
+itegr_val:
+		python3 -m setup_scripts.integration_vals_to_env
+		
 test:
 		pytest
 
