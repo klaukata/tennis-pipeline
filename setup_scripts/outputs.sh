@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_name="tf-outputs"
+file_name="tf_outputs"
 
 # check if file already exists, if so, delete it
 if [ -e "${file_name}.json" ]; then
