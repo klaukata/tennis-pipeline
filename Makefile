@@ -1,5 +1,6 @@
 help:
-		@echo " infra		Creates an AWS infrastructure"
+		@echo " tf			Execute a tf plan"
+		@echo " s3			Creates a bucket"
 		@echo " outputs		Extracts terraform outputs and saves them in /tf-outputs.json"
 		@echo " test		Tests scraper.py"
 
@@ -9,8 +10,8 @@ s3:
 		terraform '-chdir=terraform/' apply -target=aws_s3_bucket.raw_data
 
 outputs:
-		chmod +x shell_scripts/outputs.sh
-		shell_scripts/outputs.sh
+		chmod +x setup_scripts/outputs.sh
+		setup_scripts/outputs.sh
 
 tf:
 		terraform '-chdir=terraform/' apply
@@ -18,6 +19,6 @@ tf:
 test:
 		pytest
 
-# TODO - rm a /tmp/data.csv
+
 
 	
