@@ -40,4 +40,6 @@ provider "snowflake" {
 provider "snowsql" {
   account   = var.snowflake_account
   username  = var.snowflake_user
+  password  = var.snowflake_user_password
+  role      = var.snowflake_user_role
 }
