@@ -110,4 +110,4 @@ if __name__ == '__main__':
     columns = extract_col_names(table)
     data = extract_players(table)
     df = create_df(columns, data)
-    df.to_csv('/tmp/bronze_data.csv')
+    df.to_csv('/tmp/raw_data.csv')
