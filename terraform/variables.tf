@@ -6,4 +6,6 @@ variable "s3_prefix" {
 
 locals {
   bucket_name = data.dotenv.dev_config.env.BUCKET_NAME
+  account_id = data.aws_caller_identity.current.account_id
+  role_name = aws_iam_role.snowflake_uploader.name
 }
