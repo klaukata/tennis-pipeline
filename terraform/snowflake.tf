@@ -1,31 +1,24 @@
-# creare a warehouse 
+# ____________WAREHOUSE____________
 resource "snowflake_warehouse" "wh" {
   name = "project_wh"
-  comment = "A warehouse for our most recent file"
   warehouse_size = "x-small"
 }
 
-# create a storage integration w/ a bucket
-resource "snowflake_storage_integration" "integration" {
-  name = "storage"
-  type = "EXTERNAL_STAGE"
-  storage_provider = "S3"
-  enabled = true
-  storage_aws_role_arn = "arn:aws:iam::${local.account_id}:role/${local.role_name}"
-  storage_allowed_locations = [ "s3://${local.bucket_name}/" ]
+#____________DATABASE____________
+resource "snowflake_database" "goats" {
+  name = "goats"
+  comment = "A database containing both recent and historical versions of a GOAT data"
 }
 
-# read a description of this integration
-resource "snowsql_exec" "read_integration_description" {
-    create {
-      statements = "CREATE ROLE if not exists my_role"
-    }
-
-    read {
-      statements = "desc integration integ"
-    }
-
-    delete {
-      statements = "DROP ROLE IF EXISTS my_role"
-    }
+#____________SCHEMAS____________
+resource "snowflake_schema" "recent" {
+  name = "recent_schema"
+  database = "goats"
 }
+
+resource "snowflake_schema" "historical" {
+  name = "historical_schema"
+  database = "goats"
+}
+
+#____________ROLE____________
