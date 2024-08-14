@@ -21,13 +21,11 @@ test:
 
 # creates a json file w a new policy
 json:
-		python3 -m setup_scripts.integration_vals_to_env
+		python3 -m setup_scripts.integration_vals
 
 # updates a new policy
 update_policy:
-		cd terraform
-		aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://new_trust_policy.json   
-		cd ..
+		aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
 
 
 	
