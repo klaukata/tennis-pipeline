@@ -15,13 +15,19 @@ outputs:
 
 tf:
 		terraform '-chdir=terraform/' apply
-
-itegr_val:
-		python3 -m setup_scripts.integration_vals_to_env
-		
+	
 test:
 		pytest
 
+# creates a json file w a new policy
+json:
+		python3 -m setup_scripts.integration_vals_to_env
+
+# updates a new policy
+update_policy:
+		cd terraform
+		aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://new_trust_policy.json   
+		cd ..
 
 
 	
