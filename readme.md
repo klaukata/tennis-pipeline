@@ -9,3 +9,6 @@ Set up (so far):
 5. `make ft` (create a cloudwatch alarm)
 6. execute *terraform/aws_iam.tf* (create iam role)
 7. add your snowflake credentials to *terraform/secret-variables.tf*
+8. run tf/sf
+9. `make itegr_val`
+10. `make update_policy`
