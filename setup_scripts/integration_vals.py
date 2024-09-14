@@ -1,3 +1,12 @@
+'''
+code above creates a IAM user permission to access an s3 bucket , that is:
+    1. exctracts STORAGE_AWS_EXTERNAL_ID and STORAGE_AWS_IAM_USER_ARN values
+    from tf_outputs.json file
+    2. creates a new iam policy object and includes extracted values
+    3. converts this policy to json and saves it inside of a terraform folder
+'''
+
+# code above extracts 
 import json
 
 with open('tf_outputs.json', 'r') as file:
