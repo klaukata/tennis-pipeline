@@ -11,7 +11,4 @@ Set up (so far):
 7. `make sf_aws` (creates snowflake integration + description output)
 8. `make outputs` (4 integration description)
 9. `make json` (creates a *terraform/new_trust_policy.json* file)
-
-REDO:
-
 10. `make update_policy`
