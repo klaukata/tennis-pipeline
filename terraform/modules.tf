@@ -9,9 +9,15 @@ module "m_02_aws" {
 }
 
 module "m_03_sf_aws" {
-    depends_on = [module.m_02_aws] #TODO 
+    # depends_on = [module.m_02_aws] #TODO 
     source = "./03_sf_aws"
     account_id = module.m_02_aws.account_id
-    role_name = module.m_02_aws.aws_role_name
+    role_name = module.m_02_aws.role_name
     bucket_name = local.bucket_name
+
+    # variable values defined in secret-variables.tf file
+    snow_acc = var.snowflake_account
+    snow_usr = var.snowflake_user
+    snow_pass = var.snowflake_user_password
+    snow_role = var.snowflake_user_role
 }
