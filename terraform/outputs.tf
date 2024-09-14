@@ -11,6 +11,6 @@ output "aws_role_name" {
   value = module.m_02_aws.role_name
 }
 
-# output "snowflake_itegration_description" {
-#   value = module.m_03_sf_aws.itegration_description
-# }
+output "snowflake_itegration_description" {
+  value = module.m_03_sf_aws.itegration_description
+}
