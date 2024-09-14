@@ -7,7 +7,7 @@ def get_prefix(json_file: str) -> str:
         with open(json_file, 'r') as file:
             json_data = json.load(file)
             return json_data['s3_bucket_prefix']['value']
-    except Exception as e:
+    except:
         print(f'File called {json_file} was not found in a project root directory.')
 
 def find_bucket_names(prefix: str) -> list:
