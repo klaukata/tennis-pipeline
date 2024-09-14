@@ -3,6 +3,8 @@ help:
 		@echo " outputs		Extracts terraform outputs and saves them in /tf-outputs.json"
 		@echo " aws			TF module 2"
 		@echo " sf_aws		TF module 3"
+		@echo " json		Creates a terraform/new_trust_policy.json file"
+
 		@echo " test		Tests scraper.py"
 
 # 01
@@ -16,8 +18,8 @@ outputs:
 	setup_scripts/outputs.sh
 
 py:
-	/bin/python3 /home/klakli/test_tennis_pipeline/tennis-pipeline/airflow/tasks/scraper/scraper.py
-	/bin/python3 /home/klakli/test_tennis_pipeline/tennis-pipeline/airflow/tasks/uploader.py
+	/bin/python3 ./airflow/tasks/scraper/scraper.py
+	/bin/python3 ./airflow/tasks/uploader.py
 
 #02
 aws:
@@ -28,11 +30,14 @@ aws:
 sf_aws:
 	terraform '-chdir=terraform/' init -target=module.m_03_sf_aws
 	terraform '-chdir=terraform/' apply -target=module.m_03_sf_aws
-	
+
+json:
+	python3 -m setup_scripts.integration_vals
 
 
 
 
+# 4 debugging:
 init:
 	terraform '-chdir=terraform/' init
 app:
@@ -41,9 +46,7 @@ app:
 test:
 		pytest
 
-# creates a json file w a new policy
-json:
-		python3 -m setup_scripts.integration_vals
+
 
 # updates a new policy
 update_policy:
