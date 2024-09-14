@@ -1,8 +1,3 @@
-# ____________BUCKET____________
-resource "aws_s3_bucket" "raw_data" {
-    bucket_prefix = var.s3_prefix
-}
-
 # ____________CLOUDWATCH ALARM____________
 resource "aws_cloudwatch_metric_alarm" "size_alarm" {
     alarm_name =    "bucket_size_alarm"
@@ -11,7 +6,7 @@ resource "aws_cloudwatch_metric_alarm" "size_alarm" {
     metric_name =  "BucketSizeBytes"
     dimensions = {
         StorageType = "StandardStorage"
-        BucketName = local.bucket_name
+        BucketName = var.bucket_name
     }
     statistic = "Maximum"
     period = 86400 # 1 day
