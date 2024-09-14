@@ -2,6 +2,7 @@ help:
 		@echo " s3			TF module 1"
 		@echo " outputs		Extracts terraform outputs and saves them in /tf-outputs.json"
 		@echo " aws			TF module 2"
+		@echo " sf_aws		TF module 3"
 		@echo " test		Tests scraper.py"
 
 # 01
