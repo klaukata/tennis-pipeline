@@ -2,7 +2,7 @@ terraform {
   required_providers {
     snowflake = {
       source  = "Snowflake-Labs/snowflake"
-      version = "0.94.1"
+      version = "0.95.0"
     }
     snowsql = {
       source  = "aidanmelen/snowsql"
@@ -11,4 +11,16 @@ terraform {
   }
 }
 
-#TODO - terraform provider at the end
+provider "snowflake" {
+  account   = var.snow_acc
+  user      = var.snow_usr
+  password  = var.snow_pass
+  role      = var.snow_role
+}
+
+provider "snowsql" {
+  account   = var.snow_acc
+  username  = var.snow_usr
+  password  = var.snow_pass
+  role      = var.snow_role
+}
