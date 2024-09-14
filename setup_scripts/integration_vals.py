@@ -12,7 +12,7 @@ import json
 with open('tf_outputs.json', 'r') as file:
     data = json.load(file)
 
-all_values = data["itegration_description"]["value"]
+all_values = data["snowflake_itegration_description"]["value"]
 
 user_arn_value = all_values[4]["property_value"]
 external_id_value = all_values[6]["property_value"]
