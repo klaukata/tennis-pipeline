@@ -2,6 +2,7 @@ help:
 		@echo " s3				TF module 1"
 		@echo " outputs			Extracts terraform outputs and saves them in /tf-outputs.json"
 		@echo " aws				TF module 2"
+		@echo " role			Creates and grants privelages to a Snowflake role"
 		@echo " sf_aws			TF module 3"
 		@echo " json			Creates a terraform/new_trust_policy.json file"
 		@echo " update_policy	Updates a trust policy"
@@ -36,6 +37,11 @@ json:
 update_policy:
 	aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
 
+role:
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_account_role.role -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.role_grant -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_privileges_to_account_role.grant -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.user_grant -auto-approve
 
 # 4 debugging:
 init:
