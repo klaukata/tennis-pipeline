@@ -5,9 +5,9 @@ variable "s3_prefix" {
 }
 
 variable "snowflake_user_role" {
-  description = "The role of the Terraform user, change before set up (if needed)"
+  description = "The role of the Terraform user"
   type        = string
-  default     = "SYSADMIN"
+  default     = "ACCOUNTADMIN"
 }
 
 locals {
