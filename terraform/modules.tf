@@ -19,5 +19,5 @@ module "m_03_sf_aws" {
     snow_acc = var.snowflake_account
     snow_usr = var.snowflake_user
     snow_pass = var.snowflake_user_password
-    snow_role = var.snowflake_user_role
+    snow_role = snowflake_account_role.role.name
 }
