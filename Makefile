@@ -1,11 +1,10 @@
 help:
-		@echo " s3			TF module 1"
-		@echo " outputs		Extracts terraform outputs and saves them in /tf-outputs.json"
-		@echo " aws			TF module 2"
-		@echo " sf_aws		TF module 3"
-		@echo " json		Creates a terraform/new_trust_policy.json file"
-
-		@echo " test		Tests scraper.py"
+		@echo " s3				TF module 1"
+		@echo " outputs			Extracts terraform outputs and saves them in /tf-outputs.json"
+		@echo " aws				TF module 2"
+		@echo " sf_aws			TF module 3"
+		@echo " json			Creates a terraform/new_trust_policy.json file"
+		@echo " update_policy	Updates a trust policy"
 
 # 01
 s3:
@@ -34,7 +33,8 @@ sf_aws:
 json:
 	python3 -m setup_scripts.integration_vals
 
-
+update_policy:
+	aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
 
 
 # 4 debugging:
@@ -44,13 +44,7 @@ app:
 	terraform '-chdir=terraform/' apply
 	
 test:
-		pytest
-
-
-
-# updates a new policy
-update_policy:
-		aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
+	pytest
 
 
 	
