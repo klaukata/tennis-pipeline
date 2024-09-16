@@ -65,7 +65,7 @@ resource "snowflake_grant_privileges_to_account_role" "schema_grant" {
 
 resource "snowflake_grant_privileges_to_account_role" "account_grant" {
   account_role_name = snowflake_account_role.role.name
-  privileges = [ "MANAGE GRANTS", "CREATE INTEGRATION" ]
+  privileges = [ "CREATE ROLE", "CREATE INTEGRATION" ]
   on_account = true
 }
 
