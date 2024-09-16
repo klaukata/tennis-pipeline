@@ -26,6 +26,13 @@ aws:
 	terraform '-chdir=terraform/' apply -target=module.m_02_aws
 	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
 
+role:
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_account_role.role -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.sysadmin_grant -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_privileges_to_account_role.schema_grant -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_privileges_to_account_role.account_grant -auto-approve
+	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.user_grant -auto-approve
+
 #03
 sf_aws:
 	terraform '-chdir=terraform/' init -target=module.m_03_sf_aws
@@ -37,11 +44,6 @@ json:
 update_policy:
 	aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
 
-role:
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_account_role.role -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.role_grant -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_privileges_to_account_role.grant -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.user_grant -auto-approve
 
 # 4 debugging:
 init:
