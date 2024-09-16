@@ -11,7 +11,7 @@ resource "snowflake_storage_integration" "integration" {
 resource "snowsql_exec" "read_integration_description" {
   depends_on = [ snowflake_storage_integration.integration ]
     create {
-      statements = "CREATE ROLE if not exists my_role"
+      statements = "CREATE ROLE if not exists temprole"
     }
 
     read {
@@ -21,7 +21,7 @@ resource "snowsql_exec" "read_integration_description" {
     }
 
     delete {
-      statements = "DROP ROLE IF EXISTS my_role"
+      statements = "DROP ROLE IF EXISTS temprole"
     }
 }
 
