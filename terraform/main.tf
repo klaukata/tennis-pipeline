@@ -43,7 +43,7 @@ resource "snowflake_grant_account_role" "role_grant" {
   parent_role_name = snowflake_account_role.role.name
 }
 
-resource "snowflake_grant_privileges_to_account_role" "grant" {
+resource "snowflake_grant_privileges_to_account_role" "itegration_grant" {
   account_role_name = snowflake_account_role.role.name
   privileges = [ "USAGE" ]
   on_account_object {
