@@ -26,8 +26,8 @@ resource "snowflake_table" "raw" {
     }
 }
 
-resource "snowflake_file_format" "csv_format" {
-    name = "csv_format" 
+resource "snowflake_file_format" "format" {
+    name = "CSVFORMAT" 
     database = snowflake_database.db.name
     schema = snowflake_schema.recent_schema.name
     format_type = "CSV"
