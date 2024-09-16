@@ -26,3 +26,7 @@ variable "snow_pass" {
 variable "snow_role" {
   type = string
 }
+
+locals {
+  format_full_path = "${snowflake_database.db.name}.${snowflake_schema.recent_schema.name}.${snowflake_file_format.format.name}"
+}
