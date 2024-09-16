@@ -24,3 +24,18 @@ resource "snowsql_exec" "read_integration_description" {
       statements = "DROP ROLE IF EXISTS my_role"
     }
 }
+
+# external stage
+resource "snowflake_stage" "stage" {
+  depends_on = [ 
+    snowflake_database.db, 
+    snowflake_schema.recent_schema, 
+    snowflake_storage_integration.integration 
+  ]
+  name = "STAGE"
+  database = snowflake_database.db.name
+  schema = snowflake_schema.recent_schema.name
+  file_format = "FORMAT_NAME = ${local.format_full_path}"
+  storage_integration = snowflake_storage_integration.integration.name
+  url = "s3://${var.bucket_name}/"
+}
