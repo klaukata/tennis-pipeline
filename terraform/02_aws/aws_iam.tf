@@ -28,12 +28,17 @@ resource "aws_iam_role" "snowflake_uploader" {
 data "aws_iam_policy_document" "iam_permissions_policy" {
     statement {
       actions = [
-        "s3:GetObjects" # retrieve objects from a bucket
+        "s3:GetObject", # retrieve objects from a bucket
+        "s3:PutObject", # add an obj to a bucket
+        "s3:DeleteObject" # rm a null version 
       ]
       resources = [ "arn:aws:s3:::${var.bucket_name}/*" ]
     }
     statement {
-      actions = [ "s3:ListBucket" ] # lists objects in a bucket
+      actions = [ 
+        "s3:ListBucket", # lists objects in a bucket
+        "s3:GetBucketLocation" # returns an s3 region
+      ] 
       resources = [ "arn:aws:s3:::${var.bucket_name}" ]
     }
 }
