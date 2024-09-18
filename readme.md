@@ -15,5 +15,6 @@ Set up (so far):
 9. `make outputs` (4 integration description)
 10. `make json` (creates a *terraform/new_trust_policy.json* file)
 11. `make update_policy`
+12. `make copy` (s3 -> sf)
 
 **note**: teraform [xyz] -auto-approve 
