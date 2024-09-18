@@ -9,8 +9,7 @@ help:
 
 # 01
 s3:
-	terraform '-chdir=terraform/' init
-	terraform '-chdir=terraform/' apply -target=module.m_01_s3 
+	terraform '-chdir=terraform/' apply -target=module.m_s3 
 	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
 
 outputs:
@@ -23,20 +22,17 @@ py:
 
 #02
 aws:
-	terraform '-chdir=terraform/' apply -target=module.m_02_aws
+	terraform '-chdir=terraform/' apply -target=module.m_aws
 	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
 
-role:
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_account_role.role -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.sysadmin_grant -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_privileges_to_account_role.schema_grant -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_privileges_to_account_role.account_grant -auto-approve
-	terraform '-chdir=terraform/' apply -target=resource.snowflake_grant_account_role.user_grant -auto-approve
-
 #03
+sf:
+	terraform '-chdir=terraform/' apply -target=module.m_sf_setup
+
+#04
 sf_aws:
-	terraform '-chdir=terraform/' init -target=module.m_03_sf_aws
-	terraform '-chdir=terraform/' apply -target=module.m_03_sf_aws
+	terraform '-chdir=terraform/' apply -target=module.m_sf_aws
+	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
 
 json:
 	python3 -m setup_scripts.integration_vals
@@ -44,13 +40,18 @@ json:
 update_policy:
 	aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
 
+copy:
+	terraform '-chdir=terraform/' apply -target=resource.snowsql_exec.copy_table
+
 
 # 4 debugging:
 init:
 	terraform '-chdir=terraform/' init
 app:
 	terraform '-chdir=terraform/' apply
-	
+prov:
+	terraform '-chdir=terraform/' providers
+
 test:
 	pytest
 
