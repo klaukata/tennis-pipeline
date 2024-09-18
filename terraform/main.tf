@@ -29,66 +29,25 @@ data "dotenv" "dev_config" {
   filename = ".env"
 }
 
-# connecting to a snowflake acc
-provider "snowflake" {
-  account   = var.snowflake_account
-  user      = var.snowflake_user
-  password  = var.snowflake_user_password
-  role      = var.snowflake_user_role
-}
-
 provider "snowsql" {
   account   = var.snowflake_account
   username  = var.snowflake_user
   password  = var.snowflake_user_password
-  role      = snowflake_account_role.role.name
+  role      = "CUSTOMROLE"
 }
 
-# custom role creation
-resource "snowflake_account_role" "role" {
-  name = "CUSTOMROLE"
-}
-
-resource "snowflake_grant_account_role" "sysadmin_grant" {
-  role_name = "SYSADMIN"
-  parent_role_name = snowflake_account_role.role.name
-}
-
-
-resource "snowflake_grant_privileges_to_account_role" "schema_grant" {
-  account_role_name = snowflake_account_role.role.name
-  privileges = [ "CREATE STAGE" ]
-  on_schema {
-    all_schemas_in_database = "DB"
+# copy from an ext. stage to a table
+resource "snowsql_exec" "copy_table" {
+  create {
+    statements = <<-EOF
+      create role if not exists temprole;
+      COPY INTO DB.RECENT."raw_table"
+        from @DB.RECENT.STAGE
+        file_format = (FORMAT_NAME = DB.RECENT.CSVFORMAT)
+        on_error = "continue";
+    EOF
   }
+  delete {
+    statements = "drop role if exists temprole"
+  }  
 }
-
-resource "snowflake_grant_privileges_to_account_role" "account_grant" {
-  account_role_name = snowflake_account_role.role.name
-  privileges = [ "CREATE ROLE", "CREATE INTEGRATION" ]
-  on_account = true
-}
-
-resource "snowflake_grant_account_role" "user_grant" {
-  role_name = snowflake_account_role.role.name
-  parent_role_name = "ACCOUNTADMIN"
-}
-
-# copy from an ext. stange to a table
-# resource "snowsql_exec" "copy_table" {
-#   depends_on = [ snowflake_stage.stage ]
-#   create {
-#     statements = "create role if not exists temprole"
-#   }
-#   read {
-#     statements = <<-EOF
-#       COPY INTO ${snowflake_table.raw.name}
-#         from @${snowflake_stage.stage.name}
-#         file_format = (FORMAT_NAME = "${local.format_full_path}")
-#         on_error = "continue"
-#     EOF
-#   }
-#   delete {
-#     statements = "drop role if exists temprole"
-#   }  
-# }
