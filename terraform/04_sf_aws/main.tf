@@ -16,6 +16,7 @@ provider "snowflake" {
   user      = var.snow_usr
   password  = var.snow_pass
   role      = var.snow_role
+  warehouse = "WH"
 }
 
 provider "snowsql" {
@@ -23,4 +24,5 @@ provider "snowsql" {
   username  = var.snow_usr
   password  = var.snow_pass
   role      = var.snow_role
+  warehouse = "WH"
 }

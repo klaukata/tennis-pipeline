@@ -4,16 +4,21 @@ resource "snowflake_database" "db" {
 }
 
 resource "snowflake_schema" "recent_schema" {
+    depends_on = [ snowflake_database.db ]
     name = "RECENT"
     database = snowflake_database.db.name
 }
 
 resource "snowflake_schema" "previous_schema" {
+    depends_on = [ snowflake_database.db ]
     name = "PREVIOUS"
     database = snowflake_database.db.name
 }
 
 resource "snowflake_table" "raw" {
+    depends_on = [ 
+        snowflake_schema.recent_schema
+    ]
     database = snowflake_database.db.name
     schema = snowflake_schema.recent_schema.name
     name = "raw_table"
@@ -27,6 +32,9 @@ resource "snowflake_table" "raw" {
 }
 
 resource "snowflake_file_format" "format" {
+    depends_on = [ 
+        snowflake_schema.recent_schema
+    ]
     name = "CSVFORMAT" 
     database = snowflake_database.db.name
     schema = snowflake_schema.recent_schema.name

@@ -1,5 +1,5 @@
 resource "snowflake_storage_integration" "integration" {
-  name = "storage"
+  name = "STORAGE"
   type = "EXTERNAL_STAGE"
   storage_provider = "S3"
   enabled = true
@@ -16,7 +16,7 @@ resource "snowsql_exec" "read_integration_description" {
 
     read {
       statements = <<-EOF
-        desc integration "storage"
+        desc integration "STORAGE"
       EOF
     }
 
@@ -28,7 +28,6 @@ resource "snowsql_exec" "read_integration_description" {
 # external stage
 resource "snowflake_stage" "stage" {
   depends_on = [ 
-    snowflake_database.db, 
     snowflake_schema.recent_schema, 
     snowflake_storage_integration.integration 
   ]
