@@ -12,7 +12,3 @@ output "format_path" {
 output "stage_name" {
   value = snowflake_stage.stage.name
 }
-
-output "raw_table_name" {
-  value = snowflake_table.raw.name
-}

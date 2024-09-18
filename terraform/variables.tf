@@ -5,8 +5,8 @@ variable "s3_prefix" {
 }
 
 variable "snowflake_user_role" {
-  description = "The role of the Terraform user"
   type        = string
+  description = "The role of the Terraform user"
   default     = "ACCOUNTADMIN"
 }
 
