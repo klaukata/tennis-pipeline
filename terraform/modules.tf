@@ -24,5 +24,5 @@ module "m_sf_aws" {
     snow_acc = var.snowflake_account
     snow_usr = var.snowflake_user
     snow_pass = var.snowflake_user_password
-    snow_role = "ACCOUNTADMIN"
+    snow_role = "CUSTOMROLE"
 }
