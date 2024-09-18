@@ -5,12 +5,12 @@ output "s3_bucket_prefix" {
 
 output "aws_account_id" {
   description = "An ID of an AWS account"
-  value = module.m_aws.account_id
+  value       = module.m_aws.account_id
 }
 
 output "aws_role_name" {
   description = "Name of a IAM role"
-  value = module.m_aws.role_name
+  value       = module.m_aws.role_name
 }
 
 output "snowflake_itegration_description" {

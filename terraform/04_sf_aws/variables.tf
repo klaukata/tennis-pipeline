@@ -7,7 +7,7 @@ variable "role_name" {
 }
 
 variable "bucket_name" {
-  type = string
+  type        = string
   description = "A name of a bucket where our raw data is stored"
 }
 

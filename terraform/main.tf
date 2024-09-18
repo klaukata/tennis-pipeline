@@ -5,11 +5,11 @@ terraform {
       version = "~> 5.0"
     }
     dotenv = {
-      source = "jrhouston/dotenv"
+      source  = "jrhouston/dotenv"
       version = "~> 1.0"
     }
     snowflake = {
-      source = "Snowflake-Labs/snowflake"
+      source  = "Snowflake-Labs/snowflake"
       version = "0.95.0"
     }
     snowsql = {
@@ -50,5 +50,5 @@ resource "snowsql_exec" "copy_table" {
   }
   delete {
     statements = "drop role if exists temprole"
-  }  
+  }
 }
