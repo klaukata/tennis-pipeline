@@ -34,6 +34,7 @@ provider "snowsql" {
   username  = var.snowflake_user
   password  = var.snowflake_user_password
   role      = "CUSTOMROLE"
+  warehouse = "WH"
 }
 
 # copy from an ext. stage to a table
