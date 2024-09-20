@@ -27,12 +27,11 @@ aws:
 
 #03
 sf:
-	terraform '-chdir=terraform/' apply -target=module.m_sf_setup
+	snow sql -f setup_scripts/snow_env.sql
 
 #04
 sf_aws:
 	terraform '-chdir=terraform/' apply -target=module.m_sf_aws
-	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
 
 json:
 	python3 -m setup_scripts.integration_vals
@@ -41,8 +40,7 @@ update_policy:
 	aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
 
 copy:
-	terraform '-chdir=terraform/' apply -target=resource.snowsql_exec.copy_table
-
+	snow sql -f setup_scripts/copy_raw.sql
 
 # 4 debugging:
 init:

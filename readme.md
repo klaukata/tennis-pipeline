@@ -3,12 +3,18 @@
 Set up (so far):
 
 1. obtain credentials, set them using `aws configure`, create terraform/.env file with *BUCKET_NAME=''*
-`make init`
+
+    sf credentials with `source setup_scripts/snowflake_env.sh` (in terminal)
+    in .toml file include  *[connections.myconnection]*
+    
+    `snow connection set-default myconnection`
+    
+    `make init`
+
 2. `make s3`
 3. `make outputs` (4 prefix)
 4. `make py` runs .py scripts (saving scraped data do s3 bucket)
 5. `make aws` (create a cloudwatch alarm and iam role)
-6. add your snowflake credentials to *terraform/secret-variables.tf*
 7. `make sf`
     **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
 8. `make sf_aws` (creates snowflake integration + description output)
