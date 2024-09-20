@@ -9,7 +9,9 @@ resource "snowflake_storage_integration" "integration" {
 
 # read a description of this integration
 resource "snowsql_exec" "read_integration_description" {
-  depends_on = [snowflake_storage_integration.integration]
+  depends_on = [
+    snowflake_storage_integration.integration
+  ]
   create {
     statements = "CREATE ROLE if not exists temprole"
   }
@@ -28,7 +30,7 @@ resource "snowsql_exec" "read_integration_description" {
 # external stage
 resource "snowflake_stage" "stage" {
   depends_on = [
-    snowflake_storage_integration.integration
+    snowsql_exec.read_integration_description
   ]
   name                = "STAGE"
   database            = "DB"
