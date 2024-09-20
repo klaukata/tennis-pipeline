@@ -15,14 +15,34 @@ use role CUSTOMROLE;
 -- __________ DATABASE, SCHEMAS, TABLE, FILE FORMAT __________
 create database if not exists DB;
 use database DB;
+
 create schema if not exists DB.PREVIOUS;
 create schema if not exists DB.RECENT;
-create table if not exists RAW_TABLE(
-    "raw_object" VARIANT
+
+create or replace table RAW_TABLE(
+    "Index" varchar,
+    "Rank" varchar,
+    "Name" varchar,
+    "Pts" varchar,
+    "Tourn P" varchar,
+    "Rank P" varchar,
+    "Ach P" varchar,
+    "GS" varchar,
+    "TF" varchar,
+    "AF" varchar,
+    "M" varchar,
+    "O" varchar,
+    "BT" varchar,
+    "T" varchar,
+    "W@1" varchar,
+    "W%" varchar,
+    "Elo" varchar
 );
-create file format if not exists CSVFORMAT
+
+create file format if not exists DB.RECENT.CSVFORMAT
     type = CSV
-    field_delimiter = ",";
+    field_delimiter = ","
+    skip_header = 1;
 
 use role ACCOUNTADMIN;
 grant CREATE STAGE on all schemas in database DB to role CUSTOMROLE;
