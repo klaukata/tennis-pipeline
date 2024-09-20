@@ -12,17 +12,11 @@ terraform {
 }
 
 provider "snowflake" {
-  account   = var.snow_acc
-  user      = var.snow_usr
-  password  = var.snow_pass
   role      = var.snow_role
   warehouse = "WH"
 }
 
 provider "snowsql" {
-  account   = var.snow_acc
-  username  = var.snow_usr
-  password  = var.snow_pass
   role      = var.snow_role
   warehouse = "WH"
 }
