@@ -42,6 +42,8 @@ update_policy:
 copy:
 	snow sql -f setup_scripts/copy_raw.sql
 
+profile:
+	python3 setup_scripts/dbt_profile.py
 # 4 debugging:
 init:
 	terraform '-chdir=terraform/' init

@@ -23,4 +23,13 @@ Set up (so far):
 11. `make update_policy`
 12. `make copy` (s3 -> sf)
 
+____
+transforming:
+1. `make profile`, for adding a dbt profile with our snowflake credentials as env vars
+___
+Resources:
+
+- ["Loading Data into Snowflake from S3" by Kenny Nagano](https://medium.com/@kenny.nagano/loading-data-into-snowflake-from-s3-c5499ccc179)
+- ["How to Work with YAML in Python" by Mercy Bassey](https://earthly.dev/blog/yaml-in-python/)
+___
 **note**: teraform [xyz] -auto-approve 
