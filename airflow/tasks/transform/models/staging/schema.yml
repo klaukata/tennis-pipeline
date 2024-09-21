@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: tst
+    description: "A test model"
+
+sources:
+  - name: raw_source
+    database: db
+    schema: recent
+    tables:
+      - name: raw_table
+        description: Raw scraped data that is already loaded into a Snowflake warehouse. 
+        columns:
+          - name: '"Index"'
+            data_tests:
+              - unique
+              - not_null
+          - name: '"Rank"'
+            data_tests:
+              - not_null
+          - name: '"Name"'
+            data_tests:
+              - not_null
+          - name: '"Pts"'
+            description: Total GOAT points.
+            data_tests:
+              - not_null
+          - name: '"Tourn P"'
+            description: Points for each tournament.
+            data_tests:
+              - not_null
+          - name: '"Rank P"'
+            description: Points for a place taken in a ranking by the end of each year.
+            data_tests:
+              - not_null
+          - name: '"GS"'
+            description: 'Grand Slam titles points, example: US Open, Roland Garros.'
+            data_tests:
+              - not_null
+          - name: '"TF"'
+            description: Tour Finals titles points.
+            data_tests:
+              - not_null
+          - name: '"AF"'
+            description: 'Alternative Tour Finals titles points, example: Dallas WTC.'
+            data_tests:
+              - not_null
+          - name: '"M"'
+            description: 'Master titles points, example: Paris Masters.'
+            data_tests:
+              - not_null
+          - name: '"O"'
+            description: Olympics titles points.
+            data_tests:
+              - not_null
+          - name: '"BT"'
+            description: Sum of Big Title pionts (GS + TF + AF + M + O).
+            data_tests:
+              - not_null
+          - name: '"T"'
+            description: Sum of all titles (from GS to ATP250).
+            data_tests:
+              - not_null
+          - name: '"W@1"'
+            description: Number of weeks at no. 1
+            data_tests:
+              - not_null
+          - name: '"W%"'
+            description: Winning procentage.
+            data_tests:
+              - not_null
+          - name: '"Elo"'
+            description: Elo point during a peak of players career.
+            data_tests:
+              - not_null
