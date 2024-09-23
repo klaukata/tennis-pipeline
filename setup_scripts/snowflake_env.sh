@@ -9,6 +9,6 @@ export SNOWFLAKE_USER="$user"
 read -s "password?Enter a value for SNOWFLAKE_PASSWORD environment variable: "
 export SNOWFLAKE_PASSWORD="$password"
 
-export SNOWFLAKE_ROLE="ACCOUNTADMIN"
+export SNOWFLAKE_ROLE="CUSTOMROLE"
 
 echo "\nEnvionment variables have been set succesfully"
