@@ -26,6 +26,9 @@ Set up (so far):
 ____
 transforming:
 1. `make profile`, for adding a dbt profile with our snowflake credentials as env vars
+2. `cd` to /transform
+3. `dbt test --select "source:*"`
+4. `dbt run`
 ___
 Resources:
 
