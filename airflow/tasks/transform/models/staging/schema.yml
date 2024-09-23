@@ -1,8 +1,14 @@
 version: 2
 
 models:
-  - name: tst
-    description: "A test model"
+  - name: stg_o_col
+    description: Model that replaces hyphens to zeros in a column O(olympic_titles).
+  - name: stg_w_proc_col
+    description: Model that tuncates '%' symbol from a column, and transform it to a float.
+  - name: stg_renamed
+    description: Model that renames columns and converts their types.
+  - name: stg_cleaned_data
+    description: Model that creates a final, clean version of "raw_table", used later in ../marts folder.
 
 sources:
   - name: raw_source
@@ -34,6 +40,10 @@ sources:
             description: Points for a place taken in a ranking by the end of each year.
             data_tests:
               - not_null
+          - name: '"Ach P"'
+            description: Points for achivements, performance and statistics.
+            data_tests:
+              - not_null
           - name: '"GS"'
             description: 'Grand Slam titles points, example: US Open, Roland Garros.'
             data_tests:
@@ -63,7 +73,7 @@ sources:
             data_tests:
               - not_null
           - name: '"W@1"'
-            description: Number of weeks at no. 1
+            description: Number of weeks at no. 1.
             data_tests:
               - not_null
           - name: '"W%"'
