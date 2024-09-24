@@ -7,8 +7,12 @@ models:
     description: Model that tuncates '%' symbol from a column, and transform it to a float.
   - name: stg_renamed
     description: Model that renames columns and converts their types.
-  - name: stg_cleaned_data
+  - name: stg_clean_raw
     description: Model that creates a final, clean version of "raw_table", used later in ../marts folder.
+    config:
+      materialized: table
+  - name: int_ratio
+    description: Model that creates ...
 
 sources:
   - name: raw_source
