@@ -12,7 +12,7 @@ models:
     config:
       materialized: table
   - name: int_ratio
-    description: Model that creates ...
+    description: Model that creates a 'GS:T' and 'GS:BT' ratios for each player.
 
 sources:
   - name: raw_source
