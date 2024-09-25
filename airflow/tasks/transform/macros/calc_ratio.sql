@@ -1,3 +1,8 @@
 {% macro calc_ratio(col_a, col_b) %}
-    ROUND(({{ col_a }}::float) / NULLIF({{col_b}}, 0), 2)
+    case
+        when {{ col_b }} = 0
+            then null
+        else
+            {{col_a}}::float // {{col_b}}
+    end
 {% endmacro %}
