@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: dim_goat_table
+    description: Final table ready for visualizations
+  - name: dim_statistics__overall
+    description: TODO
