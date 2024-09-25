@@ -3,6 +3,8 @@
         when {{ col_b }} = 0
             then null
         else
-            {{col_a}}::float // {{col_b}}
+            round(
+                {{col_a}}::float / {{col_b}}
+            , 2)
     end
 {% endmacro %}

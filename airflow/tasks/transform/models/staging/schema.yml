@@ -11,7 +11,7 @@ models:
     description: Model that creates a final, clean version of "raw_table", used later in ../marts folder.
     config:
       materialized: table
-  - name: int_ratio
+  - name: int_ratios
     description: Model that creates a 'GS:T' and 'GS:BT' ratios for each player.
   - name: int_goat_pts_deviation
     description: Model that determinates how each player's points compare to the average.
