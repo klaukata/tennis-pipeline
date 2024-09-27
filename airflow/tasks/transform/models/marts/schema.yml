@@ -2,6 +2,6 @@ version: 2
 
 models:
   - name: dim_goat_table
-    description: Final table ready for visualizations
-  - name: dim_statistics__overall
-    description: TODO
+    description: Final table ready for visualizations.
+  - name: dim_stats__goat_pts
+    description: 1 row table containing basic statistical information about goat_pts.
