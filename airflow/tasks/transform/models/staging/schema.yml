@@ -3,18 +3,41 @@ version: 2
 models:
   - name: stg_o_col
     description: Model that replaces hyphens to zeros in a column O(olympic_titles).
+    data_tests:
+      - not_null_table
+    columns:
+      - name: player_key
+        data_tests:
+          - unique
   - name: stg_w_proc_col
     description: Model that tuncates '%' symbol from a column, and transform it to a float.
+    data-tests:
+      - not_null_table
+    columns:
+      - name: player_key
+        data_tests:
+          - unique
   - name: stg_renamed
     description: Model that renames columns and converts their types.
+    data_tests:
+      - not_null_table
   - name: stg_clean_raw
     description: Model that creates a final, clean version of "raw_table", used later in ../marts folder.
+    data_tests:
+      - not_null_table
     config:
       materialized: table
   - name: int_ratios
     description: Model that creates a 'GS:T' and 'GS:BT' ratios for each player.
+    columns:
+      - name: player_key
+        data_tests:
+          - unique
+          - not_null
   - name: int_goat_pts_deviation
     description: Model that determinates how each player's points compare to the average.
+    data_tests:
+      - not_null_table
 
 sources:
   - name: raw_source
