@@ -76,27 +76,27 @@ sources:
             data_tests:
               - not_null
           - name: '"GS"'
-            description: 'Grand Slam titles points, example: US Open, Roland Garros.'
+            description: 'Grand Slam titles (example: US Open, Roland Garros).'
             data_tests:
               - not_null
           - name: '"TF"'
-            description: Tour Finals titles points.
+            description: ATP Tour Finals titles.
             data_tests:
               - not_null
           - name: '"AF"'
-            description: 'Alternative Tour Finals titles points, example: Dallas WTC.'
+            description: 'Alternative Tour Finals titles (example: Dallas WTC).'
             data_tests:
               - not_null
           - name: '"M"'
-            description: 'Master titles points, example: Paris Masters.'
+            description: 'Master titles, example: Paris Masters.'
             data_tests:
               - not_null
           - name: '"O"'
-            description: Olympics titles points.
+            description: Olympics titles.
             data_tests:
               - not_null
           - name: '"BT"'
-            description: Sum of Big Title pionts (GS + TF + AF + M + O).
+            description: Sum of big titles (BT = GS + TF + AF + M + O).
             data_tests:
               - not_null
           - name: '"T"'
