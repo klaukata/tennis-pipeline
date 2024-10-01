@@ -10,7 +10,7 @@ select
 	rn.atp,
 	rn.alt,
 	rn.m,
-    o.olym,
+    o.o,
 	rn.bt,
 	rn.t,
 	rn.no1_weeks,
