@@ -43,6 +43,8 @@ sources:
   - name: raw_source
     database: db
     schema: recent
+    freshness:
+      error_after: {count: 8, period: day}
     tables:
       - name: raw_table
         description: Raw scraped data that is already loaded into a Snowflake warehouse. 
