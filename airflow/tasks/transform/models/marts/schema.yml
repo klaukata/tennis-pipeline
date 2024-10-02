@@ -11,13 +11,31 @@ models:
     columns:
       - name: PLAYER_KEY
         data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
           - relationships:
               to: ref('stg_clean_raw')
               field: PLAYER_KEY
-
-
-
-
+      - name: o
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+      - name: win_proc
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+      - name: gs_bt_ratio
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+      - name: gs_t_ratio
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+      - name: goat_deviation
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
   - name: dim_stats__goat_pts
     description: 1 row table containing basic statistical information about goat_pts.
     data_tests:
