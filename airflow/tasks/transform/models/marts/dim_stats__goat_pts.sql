@@ -16,7 +16,7 @@ basic_stats as (
         -- avg
         round(avg(goat_pts::float), 2) as avg,
         -- modal
-        (select n from most_frequent_points limit 1) as modal,
+        (select g from most_frequent_points limit 1) as modal,
         -- standard deviation
         round(stddev(goat_pts), 2) as std_dev
     from {{ ref('dim_goat_table') }}
