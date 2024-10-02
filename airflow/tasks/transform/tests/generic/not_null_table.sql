@@ -11,9 +11,11 @@
     where {{ col.column }} is null
   )
   having c > 0
+
   {%- if not loop.last %}
     union all
-    {%- endif %}
+  {%- endif %}
+  
 {%- endfor -%}
 
 {%- endif -%}
