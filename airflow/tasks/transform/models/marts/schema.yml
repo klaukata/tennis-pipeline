@@ -3,5 +3,25 @@ version: 2
 models:
   - name: dim_goat_table
     description: Final table ready for visualizations.
+    data_tests:
+      - not_null_table:
+          excl_col_list: [GS_BT_RATIO, GS_T_RATIO]
+      - dbt_expectations.expect_table_column_count_to_equal:
+          value: 20
+    columns:
+      - name: PLAYER_KEY
+        data_tests:
+          - relationships:
+              to: ref('stg_clean_raw')
+              field: PLAYER_KEY
+
+
+
+
   - name: dim_stats__goat_pts
     description: 1 row table containing basic statistical information about goat_pts.
+    data_tests:
+      - dbt_expectations.expect_table_column_count_to_equal:
+          value: 9
+      - dbt_expectations.expect_table_row_count_to_equal:
+          value: 1
