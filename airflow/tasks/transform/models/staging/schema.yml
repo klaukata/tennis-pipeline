@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_o_col
-    description: Model that replaces hyphens to zeros in a column O(olympic_titles).
+    description: Model that replaces hyphens to zeros in a column O (olympic_titles).
     data_tests:
       - not_null_table
     columns:
@@ -38,6 +38,23 @@ models:
     description: Model that determinates how each player's points compare to the average.
     data_tests:
       - not_null_table
+
+unit_tests:
+  - name: tst_ratios
+    description: smth
+    model: int_ratios
+    given:
+      - input: ref('stg_clean_raw')
+        rows:
+          - {player_key: '1', gs: 0, bt: 0, t: 1913811}
+          - {player_key: '2', gs: 0, bt: 0, t: 0}
+          - {player_key: '3', gs: 1, bt: 1, t: 32}
+    expect:
+      rows: 
+        - {player_key: 1, gs_bt_ratio: null, gs_t_ratio: 0}
+        - {player_key: 2, gs_bt_ratio: null, gs_t_ratio: null}
+        - {player_key: 3, gs_bt_ratio: 1, gs_t_ratio: 0.03}
+
 
 sources:
   - name: raw_source
