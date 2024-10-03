@@ -41,7 +41,6 @@ models:
 
 unit_tests:
   - name: tst_ratios
-    description: smth
     model: int_ratios
     given:
       - input: ref('stg_clean_raw')
