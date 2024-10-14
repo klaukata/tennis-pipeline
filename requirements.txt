@@ -1,0 +1,6 @@
+# scraping
+bs4
+selenium
+webdriver-manager
+pandas
+boto3
