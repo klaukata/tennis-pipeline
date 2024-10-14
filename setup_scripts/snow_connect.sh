@@ -12,3 +12,5 @@ export SNOWFLAKE_PASSWORD="$password"
 export SNOWFLAKE_ROLE="CUSTOMROLE"
 
 echo "\nEnvionment variables have been set succesfully"
+
+snow connection add -n myconnection -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER -p $SNOWFLAKE_PASSWORD -r $SNOWFLAKE_ROLE --default

@@ -1,15 +1,15 @@
 ## Demo v0.2
 
-Set up (so far):
+Set up:
 
-1. obtain credentials, set them using `aws configure`, create terraform/.env file with *BUCKET_NAME=''*
+1. `aws configure`, create terraform/.env file with *BUCKET_NAME=''*
 
-    sf credentials with `source setup_scripts/snowflake_env.sh` (in terminal)
-    in .toml file include  *[connections.myconnection]*
+2. connect to snowflake with `source setup_scripts/snowflake_env.sh`. This shell script will ask you about snowflake account, user and password, set those values as env vars and use them in `snow connection add` command.
     
-    `snow connection set-default myconnection`
-    
-    `make init`
+3. initialize terraform env with `make init`
+___
+
+**old steps from main branch:**
 
 2. `make s3`
 3. `make outputs` (4 prefix)
