@@ -7,13 +7,16 @@ Set up:
 2. connect to snowflake with `source setup_scripts/snowflake_env.sh`. This shell script will ask you about snowflake account, user and password, set those values as env vars and use them in `snow connection add` command.
     
 3. initialize terraform env with `make init`
+
+4. `make s3` (creates a s3 bucket)
+
+5. `make outputs` (creates a tf_outputs.json file of terraform outputs)(4 prefix)
+
+6. `make py` runs .py scripts (saves scraped data to a s3 bucket)
 ___
 
 **old steps from main branch:**
 
-2. `make s3`
-3. `make outputs` (4 prefix)
-4. `make py` runs .py scripts (saving scraped data do s3 bucket)
 5. `make aws` (create a cloudwatch alarm and iam role)
 7. `make sf`
     **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 

@@ -17,8 +17,8 @@ outputs:
 	setup_scripts/outputs.sh
 
 py:
-	/bin/python3 ./airflow/tasks/scraper/scraper.py
-	/bin/python3 ./airflow/tasks/uploader.py
+	python3 ./airflow/tasks/scraper.py
+	python3 ./airflow/tasks/uploader.py
 
 #02
 aws:
