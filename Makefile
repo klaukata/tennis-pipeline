@@ -20,6 +20,11 @@ py:
 	python3 ./airflow/tasks/scraper.py
 	python3 ./airflow/tasks/uploader.py
 
+base_build:
+	docker build -t base-img .
+
+base_run:
+	docker run --name base-container base-img
 #02
 aws:
 	terraform '-chdir=terraform/' apply -target=module.m_aws
