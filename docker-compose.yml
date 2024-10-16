@@ -1,9 +1,8 @@
-version: '3'
 name: pipelinecluster
 
 x-airflow-common:
   &airflow-common
-  image: ${AIRFLOW_IMAGE_NAME:-base-img}
+  build: .
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
@@ -115,7 +114,7 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  airflow-init: 
+  airflow-init:
     <<: *airflow-common
     entrypoint: /bin/bash
     # yamllint disable rule:line-length
@@ -179,6 +178,7 @@ services:
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}:/sources
 
+
   airflow-cli:
     <<: *airflow-common
     profiles:
@@ -191,6 +191,6 @@ services:
       - bash
       - -c
       - airflow
-      
+
 volumes:
   postgres-db-volume:
