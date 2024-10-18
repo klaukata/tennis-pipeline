@@ -10,9 +10,7 @@ Set up:
 
 4. `make s3` (creates a s3 bucket)
 
-5. `make outputs` (creates a tf_outputs.json file of terraform outputs)(4 prefix)
-
-6. `make py` runs .py scripts (saves scraped data to a s3 bucket)
+5. `make bucket_name` (saves a bucket name in terraform/.env file)
 ___
 
 **old steps from main branch:**
