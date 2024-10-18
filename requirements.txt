@@ -1,6 +1,13 @@
 # scraping
 bs4
 selenium
+lxml
 webdriver-manager
 pandas
 boto3
+python-dotenv
+
+apache-airflow
+dbt-postgres
+psycopg2==2.9.3
+pytz
