@@ -7,24 +7,29 @@ help:
 		@echo " json			Creates a terraform/new_trust_policy.json file"
 		@echo " update_policy	Updates a trust policy"
 
-# 01
-s3:
-	terraform '-chdir=terraform/' apply -target=module.m_s3 
-	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
-
-outputs:
-	chmod +x setup_scripts/outputs.sh
-	setup_scripts/outputs.sh
-
-py:
-	python3 ./airflow/tasks/scraper.py
-	python3 ./airflow/tasks/uploader.py
-
+# docker commands
 base_build:
 	docker build -t base-img .
 
 base_run:
 	docker run --name base-container base-img
+
+build: 
+	docker compose build
+
+up_init:
+	docker compose up airflow-init
+
+up:
+	docker compose up
+
+bucket_name:
+	python3 setup_scripts/bucket_name_env_var.py
+
+s3:
+	terraform '-chdir=terraform/' apply -target=module.m_s3 
+	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
+
 #02
 aws:
 	terraform '-chdir=terraform/' apply -target=module.m_aws
@@ -37,6 +42,14 @@ sf:
 #04
 sf_aws:
 	terraform '-chdir=terraform/' apply -target=module.m_sf_aws
+
+outputs:
+	chmod +x setup_scripts/outputs.sh
+	setup_scripts/outputs.sh
+
+py:
+	python3 ./airflow/tasks/scraper.py
+	python3 ./airflow/tasks/uploader.py
 
 json:
 	python3 -m setup_scripts.integration_vals
