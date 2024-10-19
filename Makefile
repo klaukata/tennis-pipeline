@@ -33,7 +33,6 @@ s3:
 #02
 aws:
 	terraform '-chdir=terraform/' apply -target=module.m_aws
-	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
 
 #03
 sf:
