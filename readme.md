@@ -4,20 +4,22 @@ Set up:
 
 1. `aws configure`, create terraform/.env file with *BUCKET_NAME=''*
 
-2. connect to snowflake with `source setup_scripts/snowflake_env.sh`. This shell script will ask you about snowflake account, user and password, set those values as env vars and use them in `snow connection add` command.
+2. connect to snowflake with `source setup_scripts/snow_connect.sh`. This shell script will ask you about snowflake account, user and password, set those values as env vars and use them in `snow connection add` command.
     
 3. initialize terraform env with `make init`
 
 4. `make s3` (creates a s3 bucket)
 
 5. `make bucket_name` (saves a bucket name in terraform/.env file)
+
+6. `make aws` (create a cloudwatch alarm and iam role)
+
+7. `make sf`s
+    **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
 ___
 
 **old steps from main branch:**
 
-5. `make aws` (create a cloudwatch alarm and iam role)
-7. `make sf`
-    **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
 8. `make sf_aws` (creates snowflake integration + description output)
 9. `make outputs` (4 integration description)
 10. `make json` (creates a *terraform/new_trust_policy.json* file)
