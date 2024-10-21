@@ -53,7 +53,7 @@ resource "aws_sns_topic_subscription" "size_reached_subsciption" {
 # resource that creates a role
 resource "aws_iam_role" "snowflake_uploader" {
   depends_on         = [aws_cloudwatch_metric_alarm.size_alarm]
-  name               = "snowflake_uploader"
+  name               = local.iam_role_name
   description        = "Role that will upload the most recent .csv file to Snowflake"
   assume_role_policy = data.aws_iam_policy_document.iam_trust_policy.json
 }
