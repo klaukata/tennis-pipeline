@@ -8,13 +8,12 @@ Set up:
     
 3. initialize terraform env with `make init`
 
-4. `make s3` (creates a s3 bucket)
+4. `make aws` (creates an aws infrasructure)
 
-5. `make bucket_name` (saves a bucket name in terraform/.env file)
 
-6. `make aws` (create a cloudwatch alarm and iam role)
 
-7. `make sf`s
+
+7. `make sf`
     **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
 ___
 
