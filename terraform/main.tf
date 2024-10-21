@@ -13,10 +13,3 @@ terraform {
 
 # connecting to an aws acc
 provider "aws" {}
-
-# reading .env variables from a file '.env'
-provider "dotenv" {}
-
-data "dotenv" "dev_config" {
-  filename = ".env"
-}
