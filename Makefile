@@ -23,9 +23,6 @@ up_init:
 up:
 	docker compose up
 
-bucket_name:
-	python3 setup_scripts/bucket_name_env_var.py
-
 s3:
 	terraform '-chdir=terraform/' apply -target=module.m_s3 
 	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
