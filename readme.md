@@ -10,11 +10,9 @@ Set up:
 
 4. `make aws` (creates an aws infrasructure)
 
-
-
-
-7. `make sf`
+5. `make sf`
     **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
+
 ___
 
 **old steps from main branch:**
