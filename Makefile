@@ -23,13 +23,9 @@ up_init:
 up:
 	docker compose up
 
-s3:
-	terraform '-chdir=terraform/' apply -target=module.m_s3 
-	terraform '-chdir=terraform/' apply -refresh-only -auto-approve
-
 #02
 aws:
-	terraform '-chdir=terraform/' apply -target=module.m_aws
+	terraform '-chdir=terraform/' apply
 
 #03
 sf:
