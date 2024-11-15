@@ -4,18 +4,22 @@ Set up:
 
 1. `aws configure`, create terraform/.env file with *BUCKET_NAME=''*
 
-2. connect to snowflake with `source setup_scripts/snow_connect.sh`. This shell script will ask you about snowflake account, user and password, set those values as env vars and use them in `snow connection add` command.
+2. connect to snowflake with `source setup_scripts/snow_connect.sh`. This shell script will ask you about snowflake account, user and password.
     
 3. initialize terraform env with `make init`
+
+4. `export $(cat vars.env | xargs)`, use vars.env file as env vars
+
+___
+
+**old steps from main branch:**
 
 4. `make aws` (creates an aws infrasructure)
 
 5. `make sf`
     **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
 
-___
-
-**old steps from main branch:**
+6. `make py` runs .py scripts (saving scraped data do s3 bucket)
 
 8. `make sf_aws` (creates snowflake integration + description output)
 9. `make outputs` (4 integration description)
