@@ -1,6 +1,6 @@
 # ____________BUCKET____________
 resource "aws_s3_bucket" "raw_data" {
-  bucket = var.s3_name
+  bucket = var.bucket_name
 }
 
 # ____________TRUST POLICY____________
@@ -28,7 +28,7 @@ resource "aws_cloudwatch_metric_alarm" "size_alarm" {
   metric_name       = "BucketSizeBytes"
   dimensions = {
     StorageType = "StandardStorage"
-    BucketName  = var.s3_name
+    BucketName  = var.bucket_name
   }
   statistic           = "Maximum"
   period              = 86400 # 1 day
@@ -67,14 +67,14 @@ data "aws_iam_policy_document" "iam_permissions_policy" {
       "s3:PutObject",   # add an obj to a bucket
       "s3:DeleteObject" # rm a null version 
     ]
-    resources = ["arn:aws:s3:::${var.s3_name}/*"]
+    resources = ["arn:aws:s3:::${var.bucket_name}/*"]
   }
   statement {
     actions = [
       "s3:ListBucket",       # lists objects in a bucket
       "s3:GetBucketLocation" # returns an s3 region
     ]
-    resources = ["arn:aws:s3:::${var.s3_name}"]
+    resources = ["arn:aws:s3:::${var.bucket_name}"]
   }
 }
 
