@@ -1,11 +1,25 @@
+# SETUP_SCRIPS FOLDER RELATED
+dotenv:
+	python3 ./setup_scripts/create_dotenv_file.py
+
+# TERRAFORM RELATED
+init:
+	terraform '-chdir=terraform/' init
+
+aws:
+	terraform '-chdir=terraform/' apply
+
+destroy:
+	terraform '-chdir=terraform/' destroy
+
+
+
+
+
+
+# TODO
 help:
 		@echo " s3				TF module 1"
-		@echo " outputs			Extracts terraform outputs and saves them in /tf-outputs.json"
-		@echo " aws				TF module 2"
-		@echo " role			Creates and grants privelages to a Snowflake role"
-		@echo " sf_aws			TF module 3"
-		@echo " json			Creates a terraform/new_trust_policy.json file"
-		@echo " update_policy	Updates a trust policy"
 
 # docker commands
 base_build:
@@ -23,9 +37,6 @@ up_init:
 up:
 	docker compose up
 
-#02
-aws:
-	terraform '-chdir=terraform/' apply
 
 #03
 sf:
@@ -54,9 +65,7 @@ copy:
 
 profile:
 	python3 setup_scripts/dbt_profile.py
-# 4 debugging:
-init:
-	terraform '-chdir=terraform/' init
+
 app:
 	terraform '-chdir=terraform/' apply
 prov:
