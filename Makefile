@@ -3,6 +3,12 @@ dotenv:
 	python3 ./setup_scripts/create_dotenv_file.py
 
 # TERRAFORM RELATED
+tf:
+	terraform '-chdir=terraform/' init
+	terraform '-chdir=terraform/' apply
+	terraform '-chdir=terraform/snowflake' init
+	terraform '-chdir=terraform/snowflake' apply
+# terraform debug
 init:
 	terraform '-chdir=terraform/' init
 
