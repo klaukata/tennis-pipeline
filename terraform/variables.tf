@@ -4,24 +4,30 @@ variable "bucket_name" {
   description = "Name for our S3 bucket"
 }
 
+locals {
+  bucket_arn = aws_s3_bucket.raw_data.arn
+  role_arn = "arn:aws:iam::${local.account_id}:root"
+  account_id = data.aws_caller_identity.current.account_id
+  iam_role_name = "snowflake_uploader"
+}
+
+# TODO: do i need this?
 variable "snowflake_user_role" {
   type        = string
   description = "The role of the Terraform user"
   default     = "ACCOUNTADMIN"
 }
-
-locals {
-  account_id = data.aws_caller_identity.current.account_id
-  iam_role_name = "snowflake_uploader"
-}
-
 # ____________OUTPUTS____________
 
 
-output "account_id" {
-  value = local.account_id
+output "iam_role_name_id" {
+  value = aws_iam_role.snowflake.id
 }
 
-output "iam_role_name" {
-  value = local.iam_role_name
+output "role_arn" {
+  value =  aws_iam_role.snowflake.arn
+}
+
+output "bucket_url" {
+  value = "s3://${var.bucket_name}/"
 }
