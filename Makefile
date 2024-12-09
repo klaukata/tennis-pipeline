@@ -6,7 +6,10 @@ dotenv:
 init:
 	terraform '-chdir=terraform/' init
 
-aws:
+plan:
+	terraform '-chdir=terraform/' plan
+
+apply:
 	terraform '-chdir=terraform/' apply
 
 destroy:
