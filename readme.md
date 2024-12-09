@@ -2,19 +2,20 @@
 
 Set up:
 
-1. `aws configure`, create terraform/.env file with *BUCKET_NAME=''*
+1. `aws configure`
 
 2. connect to snowflake with `source setup_scripts/snow_connect.sh`. This shell script will ask you about snowflake account, user and password.
     
 3. initialize terraform env with `make init`
 
-4. `export $(cat vars.env | xargs)`, use vars.env file as env vars
+4. `make dotenv` (creates vars.env file in projects root dir)
 
+5. `export $(cat vars.env | xargs)`, use vars.env file as env vars
+
+6. `make tf` (creates an aws infrasructure + snowflake sorage integration)
 ___
 
 **old steps from main branch:**
-
-4. `make aws` (creates an aws infrasructure)
 
 5. `make sf`
     **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
