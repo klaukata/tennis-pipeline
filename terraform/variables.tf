@@ -5,9 +5,9 @@ variable "bucket_name" {
 }
 
 locals {
-  bucket_arn = aws_s3_bucket.raw_data.arn
-  role_arn = "arn:aws:iam::${local.account_id}:root"
-  account_id = data.aws_caller_identity.current.account_id
+  bucket_arn    = aws_s3_bucket.raw_data.arn
+  role_arn      = "arn:aws:iam::${local.account_id}:root"
+  account_id    = data.aws_caller_identity.current.account_id
   iam_role_name = "snowflake_uploader"
 }
 
@@ -25,7 +25,7 @@ output "iam_role_name_id" {
 }
 
 output "role_arn" {
-  value =  aws_iam_role.snowflake.arn
+  value = aws_iam_role.snowflake.arn
 }
 
 output "bucket_url" {

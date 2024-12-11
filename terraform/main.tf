@@ -8,4 +8,4 @@ terraform {
 }
 
 # connecting to an aws acc
-provider aws {}
+provider "aws" {}

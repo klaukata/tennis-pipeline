@@ -9,10 +9,10 @@ resource "aws_s3_bucket" "raw_data" {
 data "aws_iam_policy_document" "iam_permissions_policy" {
   statement {
     actions = [
-      "s3:GetObject",     # retrieve objects from a bucket
+      "s3:GetObject", # retrieve objects from a bucket
       "s3:GetObjectVersion",
-      "s3:PutObject",     # add an obj to a bucket
-      "s3:DeleteObject"   # rm a null version 
+      "s3:PutObject",   # add an obj to a bucket
+      "s3:DeleteObject" # rm a null version 
     ]
     resources = ["${local.bucket_arn}/**"]
   }
@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "iam_permissions_policy" {
 
 # creates a policy with permissions defined above
 resource "aws_iam_policy" "s3_read" {
-  name = "policy-s3-read"
+  name   = "policy-s3-read"
   policy = data.aws_iam_policy_document.iam_permissions_policy.json
 }
 
@@ -40,29 +40,29 @@ data "aws_iam_policy_document" "iam_trust_policy" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = [local.account_id]  # dummy value
+      identifiers = [local.account_id] # dummy value
     }
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "sts:ExternalId"
-      values = ["xxxxxxxx"]  # dummy value  
+      values   = ["xxxxxxxx"] # dummy value  
     }
   }
 }
 
 # 'snowflake-uploader' role
 resource "aws_iam_role" "snowflake" {
-  name = local.iam_role_name
+  name               = local.iam_role_name
   description        = "Role that will upload the most recent .csv file to Snowflake"
   assume_role_policy = data.aws_iam_policy_document.iam_trust_policy.json
   lifecycle {
-    ignore_changes = [ assume_role_policy ] # ignore changes made later on inside a ./terraform sub dir 
+    ignore_changes = [assume_role_policy] # ignore changes made later on inside a ./terraform sub dir 
   }
 }
 
 # role can interact with a bucket
 resource "aws_iam_role_policy_attachment" "s3_prermissions_policy_for_snowflake" {
-  role = aws_iam_role.snowflake.name
+  role       = aws_iam_role.snowflake.name
   policy_arn = aws_iam_policy.s3_read.arn
 }
 
