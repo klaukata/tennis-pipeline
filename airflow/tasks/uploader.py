@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 def get_env_var(var: str):
-    load_dotenv(dotenv_path='terraform/.env')
+    load_dotenv(dotenv_path='vars.env')
     return os.getenv(var)
 
 def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
@@ -14,7 +14,7 @@ def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
         print(f'Failed to upload {file_name} to a S3 bucket, because of an error: {e}')
 
 if __name__ == '__main__':
-    bucket_name = get_env_var('BUCKET_NAME')
+    bucket_name = get_env_var('TF_VAR_bucket_name')
     upload_to_s3(
         bucket_name = bucket_name,
         file_name = 'raw_data.csv',
