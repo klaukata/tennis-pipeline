@@ -21,11 +21,7 @@ Set up:
 9. `make copy` (move a file from s3 to sf)
 ___
 
-**old steps from main branch:**
-
-8. `make sf_aws` (creates snowflake integration + description output)
-
-
+**old steps from main branch that may not work:**
 
 transforming:
 1. `make profile`, for adding a dbt profile with our snowflake credentials as env vars
