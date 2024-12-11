@@ -53,25 +53,8 @@ up_init:
 up:
 	docker compose up
 
-
-
-sf_aws:
-	terraform '-chdir=terraform/' apply -target=module.m_sf_aws
-
-outputs:
-	chmod +x setup_scripts/outputs.sh
-	setup_scripts/outputs.sh
-
-json:
-	python3 -m setup_scripts.integration_vals
-
-update_policy:
-	aws iam update-assume-role-policy --role-name snowflake_uploader --policy-document file://terraform/new_trust_policy.json   
-
-
 profile:
 	python3 setup_scripts/dbt_profile.py
-
 
 test:
 	pytest

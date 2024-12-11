@@ -24,12 +24,9 @@ ___
 **old steps from main branch:**
 
 8. `make sf_aws` (creates snowflake integration + description output)
-9. `make outputs` (4 integration description)
-10. `make json` (creates a *terraform/new_trust_policy.json* file)
-11. `make update_policy`
-12. 
 
-____
+
+
 transforming:
 1. `make profile`, for adding a dbt profile with our snowflake credentials as env vars
 2. `cd` to /transform
