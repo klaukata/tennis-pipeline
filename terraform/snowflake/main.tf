@@ -18,7 +18,7 @@ data "terraform_remote_state" "base" {
   }
 }
 
-# storage integration definition
+# storage integration
 resource "snowflake_storage_integration" "integ" {
   name = "integ"
   type = "EXTERNAL_STAGE"
@@ -26,4 +26,13 @@ resource "snowflake_storage_integration" "integ" {
   storage_provider = "S3"
   storage_aws_role_arn = data.terraform_remote_state.base.outputs.role_arn
   storage_allowed_locations = [ "${data.terraform_remote_state.base.outputs.bucket_url}" ]
+}
+
+resource "snowflake_stage" "stage" {
+  name = "stage"
+  database = "DB"
+  schema = "RECENT"
+  file_format = "FORMAT_NAME = DB.RECENT.CSVFORMAT"
+  storage_integration = snowflake_storage_integration.integ.name
+  url = "${data.terraform_remote_state.base.outputs.bucket_url}"
 }
