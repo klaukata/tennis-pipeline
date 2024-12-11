@@ -3,20 +3,18 @@ dotenv:
 	python3 ./setup_scripts/create_dotenv_file.py
 
 # TERRAFORM RELATED
-tf:
-	terraform '-chdir=terraform/' init
-	terraform '-chdir=terraform/' apply
-	terraform '-chdir=terraform/snowflake' init
-	terraform '-chdir=terraform/snowflake' apply
-# terraform debug
 init:
 	terraform '-chdir=terraform/' init
-
-plan:
-	terraform '-chdir=terraform/' plan
+	terraform '-chdir=terraform/snowflake' init
 
 apply:
 	terraform '-chdir=terraform/' apply
+	terraform '-chdir=terraform/snowflake' apply
+
+
+# terraform debug
+plan:
+	terraform '-chdir=terraform/' plan
 
 destroy:
 	terraform '-chdir=terraform/' destroy
