@@ -8,14 +8,7 @@ terraform {
 }
 provider "aws" {}
 
-provider "snowflake" {
-    # TODO: switch to use a profile arguement
-    organization_name = local.organization_name
-    account_name  = var.account_name
-    user     = local.user
-    password = local.password
-    role     = local.role
-}
+provider "snowflake" {}
 
 # remote state
 data "terraform_remote_state" "base" {
