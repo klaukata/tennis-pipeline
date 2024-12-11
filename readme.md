@@ -10,17 +10,16 @@ Set up:
 
 4. `make dotenv` (creates vars.env file in projects root dir)
 
-5. `export $(cat vars.env | xargs)`, use vars.env file as env vars
+5. `export $(cat vars.env | xargs)` (uses vars.env file as env vars)
 
-6. `make tf` (creates an aws infrasructure + snowflake sorage integration)
+6. `make sf` (creates a Snowflake infrastructure)
+
+7. `make apply` (creates an aws infrasructure + snowflake sorage integration)
+
+8. `make py` runs .py scripts (saving scraped data do s3 bucket)
 ___
 
 **old steps from main branch:**
-
-5. `make sf`
-    **note**: ACCOUNTADMIN -> CUSTOM_ROLE -> SYSADMIN 
-
-6. `make py` runs .py scripts (saving scraped data do s3 bucket)
 
 8. `make sf_aws` (creates snowflake integration + description output)
 9. `make outputs` (4 integration description)
