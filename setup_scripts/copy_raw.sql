@@ -1,5 +1,5 @@
 use schema DB.RECENT;
 copy into RAW_TABLE
-    from @STAGE
+    from @"stage"
     file_format = CSVFORMAT
     on_error = "continue";
