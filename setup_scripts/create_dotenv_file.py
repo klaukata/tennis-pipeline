@@ -23,6 +23,7 @@ print("Please input your Snoflake credentials.")
 sf_role = "ACCOUNTADMIN"
 sf_org = input("Organization: ")
 sf_acc = input("Account name: ")
+sf_identifier = input("Identifier (https://<this_value>.snowflakecomputing.com) ")
 sf_acc_name = sf_org + '-' + sf_acc
 sf_user = input("User: ")
 sf_pass = getpass("Password: ")
@@ -41,6 +42,7 @@ subprocess.run(['snow', 'connection', 'add',
 set_key(dotenv_path=dot_env_path, key_to_set='TF_VAR_bucket_name', value_to_set=bucket_name)
 set_key(dotenv_path=dot_env_path, key_to_set='SNOWFLAKE_ACCOUNT_NAME', value_to_set=sf_acc)
 set_key(dotenv_path=dot_env_path, key_to_set='SNOWFLAKE_ORGANIZATION_NAME', value_to_set=sf_org)
+set_key(dotenv_path=dot_env_path, key_to_set='SNOWFLAKE_IDENTIFIER', value_to_set=sf_identifier)
 set_key(dotenv_path=dot_env_path, key_to_set='SNOWFLAKE_USER', value_to_set=sf_user)
 set_key(dotenv_path=dot_env_path, key_to_set='SNOWFLAKE_PASSWORD', value_to_set=sf_pass)
 set_key(dotenv_path=dot_env_path, key_to_set='SNOWFLAKE_CONNECTIONS_MYCONNECTION_PASSWORD', value_to_set=sf_pass)
