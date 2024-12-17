@@ -19,17 +19,21 @@ Set up:
 8. `make py` runs .py scripts (saving scraped data do s3 bucket)
 
 9. `make copy` (move a file from s3 to sf)
-___
 
-**old steps from main branch that may not work:**
+___
 
 transforming:
-1. `make profile`, for adding a dbt profile with our snowflake credentials as env vars
-2. `cd` to /transform
-3. change a var for your location in *dbt_project.yml* file  
-3. `dbt test --select "source:*"`, testing a source
-4. `dbt run`
-5. `dbt test --exclude "source:*" tst_ratios`, testing everything, except a source and an unit test
-___
 
-**note**: teraform [xyz] -auto-approve 
+1. `make profile`, for adding a dbt profile with our snowflake credentials as env vars
+
+2. `cd` to /transform
+
+3. change a var for your location in *dbt_project.yml* file  
+
+4. `dbt deps`
+
+5. `dbt test --select "source:*"` (testing a source)
+
+6. `dbt run`
+
+7. `dbt test --exclude "source:*" tst_ratios` (testing everything else, except a source and an unit test)
