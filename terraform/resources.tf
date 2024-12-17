@@ -1,5 +1,4 @@
 # ____________BUCKET____________
-# TODO: use random provider to generate a bucket name
 resource "aws_s3_bucket" "raw_data" {
   bucket = var.bucket_name
 }

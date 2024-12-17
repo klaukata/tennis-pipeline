@@ -1,0 +1,133 @@
+version: 2
+
+models:
+  - name: stg_o_col
+    description: Model that replaces hyphens to zeros in a column O (olympic_titles).
+    data_tests:
+      - not_null_table
+    columns:
+      - name: player_key
+        data_tests:
+          - unique
+  - name: stg_w_proc_col
+    description: Model that tuncates '%' symbol from a column, and transform it to a float.
+    data-tests:
+      - not_null_table
+    columns:
+      - name: player_key
+        data_tests:
+          - unique
+  - name: stg_renamed
+    description: Model that renames columns and converts their types.
+    data_tests:
+      - not_null_table
+  - name: stg_clean_raw
+    description: Model that creates a final, clean version of "raw_table", used later in ../marts folder.
+    data_tests:
+      - not_null_table
+    config:
+      materialized: table
+  - name: int_ratios
+    description: Model that creates a 'GS:T' and 'GS:BT' ratios for each player.
+    columns:
+      - name: player_key
+        data_tests:
+          - unique
+          - not_null
+  - name: int_goat_pts_deviation
+    description: Model that determinates how each player's points compare to the average.
+    data_tests:
+      - not_null_table
+
+unit_tests:
+  - name: tst_ratios
+    model: int_ratios
+    given:
+      - input: ref('stg_clean_raw')
+        rows:
+          - {player_key: '1', gs: 0, bt: 0, t: 1913811}
+          - {player_key: '2', gs: 0, bt: 0, t: 0}
+          - {player_key: '3', gs: 1, bt: 1, t: 32}
+    expect:
+      rows: 
+        - {player_key: 1, gs_bt_ratio: null, gs_t_ratio: 0}
+        - {player_key: 2, gs_bt_ratio: null, gs_t_ratio: null}
+        - {player_key: 3, gs_bt_ratio: 1, gs_t_ratio: 0.03}
+
+
+sources:
+  - name: raw_source
+    database: db
+    schema: recent
+    freshness:
+      error_after: {count: 8, period: day}
+    tables:
+      - name: raw_table
+        description: Raw scraped data that is already loaded into a Snowflake warehouse. 
+        columns:
+          - name: '"Index"'
+            data_tests:
+              - unique
+              - not_null
+          - name: '"Rank"'
+            data_tests:
+              - not_null
+          - name: '"Name"'
+            data_tests:
+              - not_null
+          - name: '"Pts"'
+            description: Total GOAT points.
+            data_tests:
+              - not_null
+          - name: '"Tourn P"'
+            description: Points for each tournament.
+            data_tests:
+              - not_null
+          - name: '"Rank P"'
+            description: Points for a place taken in a ranking by the end of each year.
+            data_tests:
+              - not_null
+          - name: '"Ach P"'
+            description: Points for achivements, performance and statistics.
+            data_tests:
+              - not_null
+          - name: '"GS"'
+            description: 'Grand Slam titles (example: US Open, Roland Garros).'
+            data_tests:
+              - not_null
+          - name: '"TF"'
+            description: ATP Tour Finals titles.
+            data_tests:
+              - not_null
+          - name: '"AF"'
+            description: 'Alternative Tour Finals titles (example: Dallas WTC).'
+            data_tests:
+              - not_null
+          - name: '"M"'
+            description: 'Master titles, example: Paris Masters.'
+            data_tests:
+              - not_null
+          - name: '"O"'
+            description: Olympics titles.
+            data_tests:
+              - not_null
+          - name: '"BT"'
+            description: Sum of big titles (BT = GS + TF + AF + M + O).
+            data_tests:
+              - not_null
+          - name: '"T"'
+            description: Sum of all titles (from GS to ATP250).
+            data_tests:
+              - not_null
+          - name: '"W@1"'
+            description: Number of weeks at no. 1.
+            data_tests:
+              - not_null
+          - name: '"W%"'
+            description: Winning procentage.
+            data_tests:
+              - not_null
+          - name: '"Elo"'
+            description: Elo point during a peak of players career.
+            data_tests:
+              - not_null
