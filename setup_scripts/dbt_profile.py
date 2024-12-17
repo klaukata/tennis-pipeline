@@ -16,10 +16,10 @@ else:
 new_profile = {
     'outputs': {
         'dev': {
-            'account': "{{ env_var('SNOWFLAKE_ACCOUNT') }}",
+            'account': "{{ env_var('SNOWFLAKE_IDENTIFIER') }}",
             'database': 'DB',
             'password': "{{ env_var('SNOWFLAKE_PASSWORD') }}",
-            'role': 'CUSTOMROLE',
+            'role': 'ACCOUNTADMIN', #TODO
             'schema': 'RECENT',
             'threads': 10,
             'type': 'snowflake',
