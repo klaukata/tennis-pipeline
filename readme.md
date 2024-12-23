@@ -37,3 +37,13 @@ transforming:
 6. `dbt run`
 
 7. `dbt test --exclude "source:*" tst_ratios` (testing everything else, except a source and an unit test)
+
+___
+
+airflow:
+
+1. `astro dev start` (builds a Docker image)
+
+2. `envsubst < airflow_settings_template.yaml > airflow_settings.yaml` (generates airflow_settings.yaml file with confidential values from env vars)
+
+3. `astro dev object import` (imports a Snoflake connection to Airflow)
