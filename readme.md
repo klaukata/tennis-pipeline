@@ -47,3 +47,5 @@ airflow:
 2. `envsubst < airflow_settings_template.yaml > airflow_settings.yaml` (generates airflow_settings.yaml file with confidential values from env vars)
 
 3. `astro dev object import` (imports a Snoflake connection to Airflow)
+
+4. run a dag
