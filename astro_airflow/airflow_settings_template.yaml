@@ -15,7 +15,7 @@ airflow:
       conn_password: ${SNOWFLAKE_PASSWORD}
       conn_port:
       conn_extra:
-        account: ${SNOWFLAKE_IDENTIFIER}
+        account: ${SNOWFLAKE_ORGANIZATION_NAME}-${SNOWFLAKE_ACCOUNT_NAME}
         warehouse: WH
         database: DB
   pools:
