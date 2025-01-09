@@ -1,9 +1,7 @@
 from dotenv import set_key
 from pathlib import Path
 from getpass import getpass
-import string
-import random
-import subprocess
+import string, random, subprocess
 
 # create .env file
 dot_env_path = Path('vars.env')
