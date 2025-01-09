@@ -20,7 +20,7 @@ data "terraform_remote_state" "base" {
 
 # storage integration
 resource "snowflake_storage_integration" "integ" {
-  name                      = "integ"
+  name                      = "INTEG"
   type                      = "EXTERNAL_STAGE"
   enabled                   = true
   storage_provider          = "S3"
@@ -29,7 +29,7 @@ resource "snowflake_storage_integration" "integ" {
 }
 
 resource "snowflake_stage" "stage" {
-  name                = "stage"
+  name                = "STAGE"
   database            = "DB"
   schema              = "RECENT"
   file_format         = "FORMAT_NAME = DB.RECENT.CSVFORMAT"
