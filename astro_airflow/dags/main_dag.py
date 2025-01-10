@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 from airflow.decorators import dag, task
-from airflow.operators.empty import EmptyOperator
+from airflow.operators.bash import BashOperator
 from airflow.providers.snowflake.transfers.copy_into_snowflake import CopyFromExternalStageToSnowflakeOperator
 
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig, RenderConfig
@@ -25,6 +25,16 @@ profile_config = ProfileConfig(
     catchup=False,
 )
 def main_dag():
+    scrape = BashOperator(
+        task_id='scrape',
+        bash_command='python /usr/local/airflow/plugins/scraper.py', # .csv will be uploaded to /tmp/airflow[...]/output.csv
+    )
+
+    # tst = BashOperator(
+    #     task_id='tst',
+    #     bash_command='ls -al /.',
+    # )
+
     move_file_from_s3 = CopyFromExternalStageToSnowflakeOperator(
         task_id='move_file_from_s3',
         snowflake_conn_id='snowflake_conn',
@@ -50,6 +60,6 @@ def main_dag():
         operator_args={"install_deps": True},
     )
 
-    move_file_from_s3 >> transform_and_test
+    scrape >> .. >> move_file_from_s3 >> transform_and_test
 
 main_dag()
