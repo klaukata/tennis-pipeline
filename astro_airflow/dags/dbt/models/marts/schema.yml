@@ -5,7 +5,7 @@ models:
     description: Final table ready for visualizations.
     data_tests:
       - not_null_table:
-          excl_col_list: [GS_BT_RATIO, GS_T_RATIO]
+          exclude_list: [GS_BT_RATIO, GS_T_RATIO]
       - dbt_expectations.expect_table_column_count_to_equal:
           value: 20
     columns:
