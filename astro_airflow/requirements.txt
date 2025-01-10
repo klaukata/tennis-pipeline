@@ -2,3 +2,18 @@
 astronomer-cosmos
 apache-airflow-providers-snowflake
 dbt-snowflake
+
+# for scraper.py module
+bs4
+selenium
+webdriver-manager
+pandas
+boto3
+
+# lxml
+# python-dotenv
+
+# apache-airflow
+# dbt-postgres
+# psycopg2==2.9.3
+# pytz
