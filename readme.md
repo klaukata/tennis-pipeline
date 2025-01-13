@@ -16,7 +16,7 @@ Set up:
 
 7. `make apply` (creates an aws infrasructure + snowflake sorage integration)
 
-8. `make py` runs .py scripts (saving scraped data do s3 bucket)
+8. `make py` runs .py scripts (saving scraped data to s3 bucket)
 
 9. `make copy` (move a file from s3 to sf)
 
