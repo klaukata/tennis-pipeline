@@ -6,11 +6,12 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-import pandas as pd 
-
-import os, time
+import time, pandas as pd 
 
 def init_driver():
+    """
+    Initialize the Chrome WebDriver with necessary options.
+    """
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--headless')
@@ -25,12 +26,19 @@ def init_driver():
     return driver
 
 def fetch_website(driver):
+    """
+    Open the Ultimate Tennis Statistics website and return the WebDriver.
+    """
     driver.set_window_size(1980, 1080)
     url = 'https://www.ultimatetennisstatistics.com/goatList'
     driver.get(url)
     return driver
 
 def get_page_src(driver) -> str:
+    """
+    Interact with the website to accept cookies, show all player statistics, 
+    and return the page source.
+    """
     try:
         btn_cookies_selector = "button.fc-button.fc-cta-consent.fc-primary-button"
         btn_n_players_selector = "button.btn.btn-default.dropdown-toggle"
@@ -45,7 +53,7 @@ def get_page_src(driver) -> str:
         time.sleep(1)
         btn_cookies.click()
 
-        # show all player stats
+        # show all player statistics
         WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, btn_n_players_selector))
         )
@@ -71,11 +79,17 @@ def get_page_src(driver) -> str:
         driver.quit()
 
 def extract_table(html: str) -> str:
+    """
+    Parse the HTML and extract the table element.
+    """
     soup = BeautifulSoup(html, 'lxml')
     table = soup.find('table')
     return table
 
 def extract_col_names(table: str) -> list:
+    """
+    Extract column names from the table header.
+    """
     thead = table.find('thead')
     col_names_html = thead.find_all('span', {'class': 'text'})
     col_names = []
@@ -87,6 +101,9 @@ def extract_col_names(table: str) -> list:
     return col_names
 
 def extract_players(table: str) -> list:
+    """
+    Extract player data from the table rows.
+    """
     tbody = table.find('tbody')
     players_html = tbody.find_all('tr')
     players = []
@@ -101,6 +118,9 @@ def extract_players(table: str) -> list:
     return players
 
 def create_df(cols: list, data: list):
+    """
+    Create a DataFrame from column names and player data.
+    """
     df = pd.DataFrame(
         columns = cols,
         data = data 
@@ -116,8 +136,7 @@ if __name__ == '__main__':
     data = extract_players(table)
     df = create_df(columns, data)
 
-    dirpath = os.getcwd()
-    output_path = os.path.join(dirpath,'output.csv')
-    df.to_csv(output_path)
-    print(f'FILE SAVED IN {output_path}')
-    # df.to_csv('/tmp/raw_data.csv')
+    # Save the DataFrame to a CSV file
+    output_path = '/tmp/raw_data.csv'
+    df.to_csv(output_path, index=False)
+    print(f"Data saved to {output_path}")
