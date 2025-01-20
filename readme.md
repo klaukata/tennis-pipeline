@@ -16,10 +16,6 @@ Set up:
 
 7. `make apply` (creates an aws infrasructure + snowflake sorage integration)
 
-8. `make py` runs .py scripts (saving scraped data to s3 bucket)
-
-9. `make copy` (move a file from s3 to sf)
-
 ___
 
 transforming:
@@ -42,10 +38,12 @@ ___
 
 airflow:
 
-1. `astro dev start` (builds a Docker image)
+1. `envsubst < airflow_settings_template.yaml > airflow_settings.yaml` (generates airflow_settings.yaml file with confidential values from env vars)
+and `envsubst < docker-compose-template.override.yml > docker-compose.override.yml`
 
-2. `envsubst < airflow_settings_template.yaml > airflow_settings.yaml` (generates airflow_settings.yaml file with confidential values from env vars)
+2. `astro dev start` (builds a Docker image)
 
 3. `astro dev object import` (imports a Snoflake connection to Airflow)
 
 4. run a dag
+
