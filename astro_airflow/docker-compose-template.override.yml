@@ -1,0 +1,14 @@
+# Script from https://www.astronomer.io/docs/astro/cli/authenticate-to-clouds/
+# Why? -> https://www.astronomer.io/docs/software/customize-image/#docker-compose-override
+
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - ${HOME}/.aws:/home/astro/.aws:rw
+    webserver:
+        volumes:
+        - ${HOME}/.aws:/home/astro/.aws:rw
+    triggerer:
+        volumes:
+        - ${HOME}/.aws:/home/astro/.aws:rw
