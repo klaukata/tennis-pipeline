@@ -1,11 +1,17 @@
 import boto3
 import os
 
-def get_env_var(var: str):
+def get_bucket_name() -> str:
     """
-    Retrieve the value of an environment variable.
+    Retrieve the value of a abucket from ....
     """
-    return os.environ[var]
+    client = boto3.client('s3')
+    bucket_list = client.list_buckets()["Buckets"]
+    if len(bucket_list) != 1:
+        raise Exception("More than one bucket is present.")
+    else:
+        bucket_name = bucket_list[0]['Name']
+        return bucket_name
 
 def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
     """
@@ -16,10 +22,10 @@ def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
         s3.Bucket(bucket_name).upload_file(path, file_name)
         print(f'Successfully uploaded {file_name} to the S3 bucket "{bucket_name}".')
     except Exception as e:
-        print(f'Failed to upload {file_name} to a S3 bucket, because of an error: {e}')
+        raise Exception(f'Failed to upload {file_name} to a S3 bucket, because of an error: {e}')
 
 if __name__ == '__main__':
-    bucket_name = get_env_var('TF_VAR_bucket_name')
+    bucket_name = get_bucket_name()
     upload_to_s3(
         bucket_name = bucket_name,
         file_name = 'raw_data.csv',
