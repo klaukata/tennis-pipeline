@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
@@ -20,21 +20,21 @@ profile_config = ProfileConfig(
 
 @dag(
     schedule_interval="@weekly",
-    template_searchpath="/usr/local/airflow/include",
-    start_date=datetime(2024, 12, 23), #TODO
+    start_date=datetime(2024, 12, 23),
+    default_args={
+        'retry_delay': timedelta(minutes=1)
+    },
     catchup=False,
 )
 def main_dag():
-    scrape = BashOperator(
-        task_id='scrape',
-        bash_command='python /usr/local/airflow/plugins/scraper.py', # .csv will be uploaded to /tmp/airflow[...]/output.csv
-    )
-
-    # tst = BashOperator(
-    #     task_id='tst',
-    #     bash_command='ls -al /.',
-    # )
-
+    @task.bash(task_id="scrape_data", retries=2)
+    def scrape():
+        return "python /usr/local/airflow/plugins/scraper.py"   # .csv will be uploaded to /tmp/airflow[...]/output.csv
+    
+    @task.bash(task_id="upload_to_s3")
+    def upload():
+        return "python /usr/local/airflow/plugins/uploader.py"
+    
     move_file_from_s3 = CopyFromExternalStageToSnowflakeOperator(
         task_id='move_file_from_s3',
         snowflake_conn_id='snowflake_conn',
@@ -60,6 +60,6 @@ def main_dag():
         operator_args={"install_deps": True},
     )
 
-    scrape >> .. >> move_file_from_s3 >> transform_and_test
+    scrape() >> upload() >> move_file_from_s3 >> transform_and_test
 
 main_dag()
