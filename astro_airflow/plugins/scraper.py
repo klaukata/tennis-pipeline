@@ -45,7 +45,7 @@ def get_page_src(driver) -> str:
         li_all_players_selector = "ul.dropdown-menu.pull-right > :last-child"
 
         # agree to cookies
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, btn_cookies_selector))
         )
 
@@ -54,14 +54,14 @@ def get_page_src(driver) -> str:
         btn_cookies.click()
 
         # show all player statistics
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, btn_n_players_selector))
         )
         btn_n_players = driver.find_element(By.CSS_SELECTOR, btn_n_players_selector)
         time.sleep(1)
         btn_n_players.click()
 
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, li_all_players_selector))
         )
         li_all_players = driver.find_element(By.CSS_SELECTOR, li_all_players_selector)
@@ -69,7 +69,7 @@ def get_page_src(driver) -> str:
         li_all_players.click()
 
         # table extraction
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.XPATH, '//tr[@data-row-id="20"]'))
         )
         time.sleep(1)
@@ -138,5 +138,5 @@ if __name__ == '__main__':
 
     # Save the DataFrame to a CSV file
     output_path = '/tmp/raw_data.csv'
-    df.to_csv(output_path, index=False)
+    df.to_csv(output_path)
     print(f"Data saved to {output_path}")
