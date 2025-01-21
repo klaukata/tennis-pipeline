@@ -1,3 +1,8 @@
+'''
+This script automates the setup of environment variables and Snowflake connection configurations for a data pipeline. 
+It generates required credentials and configurations, stores them in a .env file, and initializes a connection to Snowflake. 
+'''
+
 from dotenv import set_key
 from pathlib import Path
 from getpass import getpass
