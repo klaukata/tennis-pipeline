@@ -1,0 +1,4 @@
+airflow_settings.yaml
+docker-compose.override.yml
+__pycache__/
+logs
