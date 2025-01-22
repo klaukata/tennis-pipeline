@@ -1,5 +1,5 @@
 '''
-this script adds a new DBT profile with snowflake as a profile type
+This script adds a new DBT profile with snowflake as a profile type.
 '''
 
 import yaml
