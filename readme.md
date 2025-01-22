@@ -10,6 +10,8 @@ Set up:
 
 4. `export $(cat vars.env | xargs)` (uses vars.env file as env vars)
 
+5?. `make profile` (adds a dbt profile with our snowflake credentials as env vars)
+
 5. `make sf` (creates a Snowflake infrastructure)
 
 6. `make apply` (creates an aws infrasructure + snowflake sorage integration)
