@@ -1,3 +1,14 @@
+# TODO
+help:
+		@echo " dotenv"
+		@echo " sf"
+		@echo " copy"
+		@echo " init	Initialize Terraform working directorties and installs plugins for required providers."
+		@echo " apply	Execute planned actions, create and update AWS infrastructure and Snowflake storage integration. "
+		@echo " files	Generate airflow_settings.yaml and docker-compose.override.yml based on users environment variables."
+
+
+
 # SETUP_SCRIPS FOLDER RELATED
 dotenv:
 	python3 ./setup_scripts/create_dotenv_file.py
@@ -14,47 +25,36 @@ init:
 	terraform '-chdir=terraform/snowflake' init
 
 apply:
-	terraform '-chdir=terraform/' apply
-	terraform '-chdir=terraform/snowflake' apply
+	terraform '-chdir=terraform/' apply -auto-approve
+	terraform '-chdir=terraform/snowflake' apply -auto-approve
 
+# AIRFLOW RELATED
+files:
+	cd astro_airflow; \
+	envsubst < airflow_settings_template.yaml > airflow_settings.yaml; \
+	envsubst < docker-compose-template.override.yml > docker-compose.override.yml
 
-py:
-	python3 ./airflow/tasks/scraper.py
-	python3 ./airflow/tasks/uploader.py
+airflow:
+	cd astro_airflow; \
+	astro dev start --wait 5m
 
-
-# terraform debug
-plan:
-	terraform '-chdir=terraform/' plan
-
+# DEBUGGING
 destroy:
+	terraform '-chdir=terraform/snowflake' destroy
 	terraform '-chdir=terraform/' destroy
 
 
 
 
-# TODO
-help:
-		@echo " s3				TF module 1"
-
-# docker commands
-base_build:
-	docker build -t base-img .
-
-base_run:
-	docker run --name base-container base-img
-
-build: 
-	docker compose build
-
-up_init:
-	docker compose up airflow-init
-
-up:
-	docker compose up
+plan:
+	terraform '-chdir=terraform/' plan
 
 profile:
 	python3 setup_scripts/dbt_profile.py
+
+
+
+
 
 test:
 	pytest
