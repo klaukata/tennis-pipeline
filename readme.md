@@ -6,7 +6,7 @@ Set up:
     
 2. initialize terraform env with `make init`
 
-!3. `make dotenv` (creates vars.env file in projects root dir)
+3. `make dotenv` (creates /vars.env file and configures snowflake connection)
 
 4. `export $(cat vars.env | xargs)` (uses vars.env file as env vars)
 
