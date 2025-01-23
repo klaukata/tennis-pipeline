@@ -11,7 +11,7 @@
 
 ### Setup
 
-1. Run `aws configure` (enter your access keys and region name).
+1. Run `make aws` (enter your access keys and region name).
     
 2. Initialize the Terraform environment with `make init`.
 
