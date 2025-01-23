@@ -5,7 +5,11 @@ This script adds a new DBT profile with snowflake as a profile type.
 import yaml
 import os
 
+dbt_directory_path = os.path.expanduser('~/.dbt')
 file_path = os.path.expanduser('~/.dbt/profiles.yml')
+
+if not os.path.exists(dbt_directory_path):
+    os.mkdir(dbt_directory_path)
 
 if os.path.exists(file_path):
     with open(file_path, 'r') as f:
