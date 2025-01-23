@@ -11,7 +11,7 @@ help:
 aws:
 	aws configure
 	chmod -R 755 ~/.aws
-	
+
 # SETUP_SCRIPS FOLDER RELATED
 dotenv:
 	python3 ./setup_scripts/create_dotenv_file.py
@@ -42,6 +42,10 @@ airflow:
 	astro dev start --wait 5m
 
 # DEBUGGING
+kill:
+	cd astro_airflow; \
+	astro d kill
+	
 destroy:
 	terraform '-chdir=terraform/snowflake' destroy
 	terraform '-chdir=terraform/' destroy
