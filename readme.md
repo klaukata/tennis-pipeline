@@ -23,7 +23,7 @@
 
 6. Execute `make sf` (creates the Snowflake infrastructure).
 
-7. Run `make apply` (creates AWS infrastructure and Snowflake storage integration).
+7. Run `make apply` and enter your e-mail address for Cloudwatch alarm (you can leave it empty) (creates AWS infrastructure and Snowflake storage integration).
 
 8. Run `make files` (generates *airflow_settings.yaml* and *docker-compose.override.yml* with confidential values from environment variables).
 

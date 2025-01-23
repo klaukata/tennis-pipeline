@@ -4,6 +4,16 @@ variable "bucket_name" {
   description = "Name for our S3 bucket"
 }
 
+variable "cloudwatch_email" {
+  type = string
+  description = "Name of an e-mail address that will recieve Cloudwatch notifications."
+  validation {
+    condition = can((regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", var.cloudwatch_email))) || var.cloudwatch_email == ""
+    error_message = "The entered e-mail address does not pass validation." 
+  }
+  
+}
+
 locals {
   bucket_arn    = aws_s3_bucket.raw_data.arn
   role_arn      = "arn:aws:iam::${local.account_id}:root"
