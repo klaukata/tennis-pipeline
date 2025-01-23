@@ -2,7 +2,6 @@ import os
 from datetime import datetime, timedelta
 
 from airflow.decorators import dag, task
-from airflow.operators.bash import BashOperator
 from airflow.providers.snowflake.transfers.copy_into_snowflake import CopyFromExternalStageToSnowflakeOperator
 
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig, RenderConfig
