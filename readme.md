@@ -1,33 +1,33 @@
-## Tennis pipeline
+## Tennis Pipeline
 
 ### Requirements
 
 - [AWS CLI](https://aws.amazon.com/cli/)
-- installed packages from /requirments.txt
+- [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli/installation/installation)
+- [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli/), required for DBT Core and Airflow integration
+- [Terraform](https://www.terraform.io/), required to provision AWS and some of the Snowflake services
+- [Docker](https://www.docker.com/), required to run the pipeline in Airflow
+- Installed packages from `/requirements.txt`
 
-### Set up:
+### Setup
 
-1. `make aws` (enter your access keys and region name)
+1. Run `aws configure` (enter your access keys and region name).
     
-2. initialize terraform env with `make init`
+2. Initialize the Terraform environment with `make init`.
 
-3. `make dotenv` (creates /vars.env file and configures snowflake connection)
+3. Run `make dotenv` (creates */vars.env* file and configures the Snowflake connection).
 
-4. `export $(cat vars.env | xargs)` (uses vars.env file as env vars)
+4. Execute `export $(cat vars.env | xargs)` (uses the *vars.env* file as environment variables).
 
-5?. `make profile` (adds a dbt profile with our snowflake credentials as env vars)
+5. Run `make profile` (adds a DBT profile with your Snowflake credentials as environment variables).
 
-5. `make sf` (creates a Snowflake infrastructure)
+6. Execute `make sf` (creates the Snowflake infrastructure).
 
-6. `make apply` (creates an aws infrasructure + snowflake sorage integration)
+7. Run `make apply` (creates AWS infrastructure and Snowflake storage integration).
 
-7. `make files` (generates airflow_settings.yaml and docker-compose-template.override.yml with confidential values from env vars)
+8. Run `make files` (generates *airflow_settings.yaml* and *docker-compose.override.yml* with confidential values from environment variables).
 
-airflow:
+9. Run `make airflow`.
 
-1. `make airflow`
-
-*1. `astro dev object import` (imports a Snoflake connection to Airflow)
-
-2. run a dag
+10. Run *main_dag* inside the Airflow UI.
 
