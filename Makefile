@@ -47,8 +47,8 @@ kill:
 	astro d kill
 	
 destroy:
-	terraform '-chdir=terraform/snowflake' destroy
-	terraform '-chdir=terraform/' destroy
+	terraform '-chdir=terraform/snowflake' destroy -auto-approve
+	terraform '-chdir=terraform/' destroy -auto-approve
 
 
 
