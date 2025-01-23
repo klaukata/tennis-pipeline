@@ -1,11 +1,14 @@
-# TODO
 help:
-		@echo " dotenv"
-		@echo " sf"
-		@echo " copy"
-		@echo " init	Initialize Terraform working directorties and installs plugins for required providers."
-		@echo " apply	Execute planned actions, create and update AWS infrastructure and Snowflake storage integration. "
-		@echo " files	Generate airflow_settings.yaml and docker-compose.override.yml based on users environment variables."
+	@echo " airflow		Run the Airflow Docker container defined in astro_airflow/Dockerfile."
+	@echo " apply		Execute planned actions, create and update AWS infrastructure and Snowflake storage integration. "
+	@echo " aws			Configure a connection with AWS and give everyone read and execute permissions on the ~/.aws folder."
+	@echo " destroy		Destroy all services built by Terraform."
+	@echo " dotenv		Configure a connection with Snowflake, generate a S3 bucket name and store login credentials in the vars.env file."
+	@echo " files		Generate airflow_settings.yaml and docker-compose.override.yml based on users environment variables."
+	@echo " init		Initialize Terraform working directorties and installs plugins for required providers."
+	@echo " kill		Permanently kill all built containers."
+	@echo " profile		Add a DBT profile with Snowflake credentials to the ~/.dbt/profiles.yml file."
+	@echo " sf			Build Snowflake infrastructure using Snowflake CLI."
 
 
 aws:
@@ -16,11 +19,11 @@ aws:
 dotenv:
 	python3 ./setup_scripts/create_dotenv_file.py
 
+profile:
+	python3 setup_scripts/dbt_profile.py
+
 sf:
 	snow sql -f setup_scripts/snow_env.sql
-
-copy:
-	snow sql -f setup_scripts/copy_raw.sql
 
 # TERRAFORM RELATED
 init:
@@ -50,19 +53,7 @@ destroy:
 	terraform '-chdir=terraform/snowflake' destroy -auto-approve
 	terraform '-chdir=terraform/' destroy -auto-approve
 
-
-
-
-plan:
-	terraform '-chdir=terraform/' plan
-
-profile:
-	python3 setup_scripts/dbt_profile.py
-
-
-
-
-
+# TODO
 test:
 	pytest
 
