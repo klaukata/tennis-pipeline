@@ -8,7 +8,10 @@ help:
 		@echo " files	Generate airflow_settings.yaml and docker-compose.override.yml based on users environment variables."
 
 
-
+aws:
+	aws configure
+	chmod -R 755 ~/.aws
+	
 # SETUP_SCRIPS FOLDER RELATED
 dotenv:
 	python3 ./setup_scripts/create_dotenv_file.py

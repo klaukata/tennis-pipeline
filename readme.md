@@ -1,8 +1,13 @@
 ## Tennis pipeline
 
-Set up:
+### Requirements
 
-1. `aws configure`
+- [AWS CLI](https://aws.amazon.com/cli/)
+- installed packages from /requirments.txt
+
+### Set up:
+
+1. `make aws` (enter your access keys and region name)
     
 2. initialize terraform env with `make init`
 
