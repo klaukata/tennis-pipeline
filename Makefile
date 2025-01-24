@@ -8,6 +8,7 @@ help:
 	@echo " init		Initialize Terraform working directorties and installs plugins for required providers."
 	@echo " kill		Permanently kill all built containers."
 	@echo " profile		Add a DBT profile with Snowflake credentials to the ~/.dbt/profiles.yml file."
+	@echo " pytest		Test the scraper module."
 	@echo " sf			Build Snowflake infrastructure using Snowflake CLI."
 
 
@@ -53,7 +54,6 @@ destroy:
 	terraform '-chdir=terraform/snowflake' destroy -auto-approve
 	terraform '-chdir=terraform/' destroy -auto-approve
 
-# TODO
 test:
 	pytest
 
