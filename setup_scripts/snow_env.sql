@@ -2,17 +2,16 @@
 create warehouse if not exists WH
     warehouse_size = "x-small";
 
-use warehouse WH;
-
--- #TODO: figure out if you should include a new role creation
 -- __________ ROLE __________
--- create role if not exists CUSTOMROLE;
+create role if not exists customrole;
+grant role sysadmin to role customrole;
+grant role customrole to role accountadmin;
+grant create integration on account to role customrole;
+grant usage on warehouse wh to role customrole;
+-- grant CREATE STAGE on all schemas in database DB to role CUSTOMROLE;
 
--- grant role SYSADMIN to role CUSTOMROLE;
--- grant role CUSTOMROLE to role ACCOUNTADMIN;
--- grant usage on warehouse WH to role CUSTOMROLE;
-
--- use role CUSTOMROLE;
+use role customrole;
+use warehouse WH;
 
 -- __________ DATABASE, SCHEMAS, TABLE, FILE FORMAT __________
 create database if not exists DB;
@@ -45,8 +44,3 @@ create file format if not exists DB.RECENT.CSVFORMAT
     type = CSV
     field_delimiter = ","
     skip_header = 1;
-
--- use role ACCOUNTADMIN;
--- grant CREATE STAGE on all schemas in database DB to role CUSTOMROLE;
--- grant CREATE ROLE on account to role CUSTOMROLE;
--- grant CREATE INTEGRATION on account to role CUSTOMROLE;
