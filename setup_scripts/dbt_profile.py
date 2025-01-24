@@ -23,7 +23,7 @@ new_profile = {
             'account': "{{ env_var('SNOWFLAKE_IDENTIFIER') }}",
             'database': 'DB',
             'password': "{{ env_var('SNOWFLAKE_PASSWORD') }}",
-            'role': 'ACCOUNTADMIN', #TODO
+            'role': 'CUSTOMROLE',
             'schema': 'RECENT',
             'threads': 10,
             'type': 'snowflake',
