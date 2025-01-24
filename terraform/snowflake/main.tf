@@ -8,7 +8,9 @@ terraform {
 }
 provider "aws" {}
 
-provider "snowflake" {}
+provider "snowflake" {
+  role = "customrole"
+}
 
 # remote state
 data "terraform_remote_state" "base" {
