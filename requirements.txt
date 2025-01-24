@@ -1,2 +1,5 @@
 python-dotenv
 pyyaml
+
+pytest
+selenium
