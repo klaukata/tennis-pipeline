@@ -18,6 +18,7 @@ airflow:
         account: ${SNOWFLAKE_ORGANIZATION_NAME}-${SNOWFLAKE_ACCOUNT_NAME}
         warehouse: WH
         database: DB
+        role: CUSTOMROLE
     - conn_id: aws_standard
       conn_type: aws
   pools:
