@@ -19,7 +19,7 @@ profile_config = ProfileConfig(
 
 @dag(
     schedule_interval="@weekly",
-    start_date=datetime(2024, 12, 23),
+    start_date=datetime.now() - timedelta(days=1),  # == yesterday
     default_args={
         'retry_delay': timedelta(minutes=1)
     },
