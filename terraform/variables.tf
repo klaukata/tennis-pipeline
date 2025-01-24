@@ -5,13 +5,12 @@ variable "bucket_name" {
 }
 
 variable "cloudwatch_email" {
-  type = string
+  type        = string
   description = "Name of an e-mail address that will recieve Cloudwatch notifications."
   validation {
-    condition = can((regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", var.cloudwatch_email))) || var.cloudwatch_email == ""
-    error_message = "The entered e-mail address does not pass validation." 
+    condition     = can((regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", var.cloudwatch_email))) || var.cloudwatch_email == ""
+    error_message = "The entered e-mail address does not pass validation."
   }
-  
 }
 
 locals {
@@ -21,14 +20,7 @@ locals {
   iam_role_name = "snowflake_uploader"
 }
 
-# TODO: do i need this?
-variable "snowflake_user_role" {
-  type        = string
-  description = "The role of the Terraform user"
-  default     = "ACCOUNTADMIN"
-}
 # ____________OUTPUTS____________
-
 
 output "iam_role_name_id" {
   value = aws_iam_role.snowflake.id
