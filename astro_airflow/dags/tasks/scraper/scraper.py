@@ -128,7 +128,7 @@ def create_df(cols: list, data: list):
     )
     return df
 
-if __name__ == '__main__':
+def scrape(output_path):
     driver_empty = init_driver()
     driver = fetch_website(driver_empty)
     page_src = get_page_src(driver)
@@ -138,6 +138,7 @@ if __name__ == '__main__':
     df = create_df(columns, data)
 
     # Save the DataFrame to a CSV file
-    output_path = sys.argv[0]
     df.to_csv(output_path)
     print(f"Data saved to {output_path}")
+
+    
