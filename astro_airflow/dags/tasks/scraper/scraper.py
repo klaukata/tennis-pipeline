@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-import time, pandas as pd 
+import time, sys, pandas as pd 
 
 def init_driver():
     """
@@ -138,6 +138,6 @@ if __name__ == '__main__':
     df = create_df(columns, data)
 
     # Save the DataFrame to a CSV file
-    output_path = '/tmp/raw_data.csv'
+    output_path = sys.argv[0]
     df.to_csv(output_path)
     print(f"Data saved to {output_path}")

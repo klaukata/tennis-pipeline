@@ -1,4 +1,4 @@
-import plugins.scraper as s
+import scraper as s
 from selenium import webdriver
 import requests
 from unittest.mock import MagicMock
