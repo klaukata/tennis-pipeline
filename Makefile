@@ -9,6 +9,7 @@ help:
 	@echo " kill		Permanently kill all built containers."
 	@echo " profile		Add a DBT profile with Snowflake credentials to the ~/.dbt/profiles.yml file."
 	@echo " pytest		Test the scraper module."
+	@echo " restart		Restart locally running Airflow containers."
 	@echo " sf			Build Snowflake infrastructure using Snowflake CLI."
 
 
@@ -49,7 +50,11 @@ airflow:
 kill:
 	cd astro_airflow; \
 	astro d kill
-	
+
+restart:
+	cd astro_airflow; \
+	astro d restart
+
 destroy:
 	terraform '-chdir=terraform/snowflake' destroy -auto-approve
 	terraform '-chdir=terraform/' destroy -auto-approve
