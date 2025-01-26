@@ -1,6 +1,19 @@
-## Tennis Pipeline
+##  Ultimate Tennis Statistics End-To-End ELT Pipeline
 
-### Requirements
+Pipeline that extracts data from [Ultimate Tennis Statistics](https://www.ultimatetennisstatistics.com/) Player database and transforms it for a Power BI Dashboard.
+
+### Overview
+
+### Data Visualization
+
+
+### Architecture
+
+[img]
+
+Infrastructure provisioning through Terraform, containerized through Docker and orchestrated through Airflow. Created dashboard through Metabase.
+
+### Prerequisites
 
 - [AWS CLI](https://aws.amazon.com/cli/)
 - [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli/installation/installation)
@@ -9,7 +22,7 @@
 - [Docker](https://www.docker.com/), required to run the pipeline in Airflow
 - Installed packages from `/requirements.txt`
 
-### Setup
+### How to Run This Project
 
 1. Run `make aws` (enter your access keys and region name).
     
@@ -31,3 +44,6 @@
 
 10. Run *main_dag* inside the Airflow UI.
 
+### Lessons Learned
+
+### Contact
