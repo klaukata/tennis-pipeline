@@ -1,12 +1,20 @@
 import os
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from airflow.decorators import dag, task
+from airflow.utils.dates import days_ago
 from airflow.providers.snowflake.transfers.copy_into_snowflake import CopyFromExternalStageToSnowflakeOperator
 
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig, RenderConfig
 from cosmos.profiles import SnowflakeUserPasswordProfileMapping
 from cosmos.constants import SourceRenderingBehavior, TestBehavior
+
+from tasks.scraper import scraper as scraper_module
+from tasks import (
+    uploader as uploader_module, 
+    validator as validator_module)
+
+CSV_PATH = "/tmp/raw_data.csv"
 
 profile_config = ProfileConfig(
     profile_name="default",
@@ -19,20 +27,24 @@ profile_config = ProfileConfig(
 
 @dag(
     schedule_interval="@weekly",
-    start_date=datetime.now() - timedelta(days=1),  # == yesterday
+    start_date=days_ago(1),  # == yesterday
     default_args={
         'retry_delay': timedelta(minutes=1)
     },
     catchup=False,
 )
 def main_dag():
-    @task.bash(task_id="scrape_data", retries=2)
+    @task(task_id="scrape_data", retries=2)
     def scrape():
-        return "python /usr/local/airflow/plugins/scraper.py"   # .csv will be uploaded to /tmp/airflow[...]/output.csv
+        scraper_module.scrape(CSV_PATH)
     
-    @task.bash(task_id="upload_to_s3")
+    @task(task_id="validate_scraped_data")
+    def validate():
+        validator_module.validator(CSV_PATH)
+
+    @task(task_id="upload_to_s3")
     def upload():
-        return "python /usr/local/airflow/plugins/uploader.py"
+        uploader_module.uploader()
     
     move_file_from_s3 = CopyFromExternalStageToSnowflakeOperator(
         task_id='move_file_from_s3',
@@ -59,6 +71,6 @@ def main_dag():
         operator_args={"install_deps": True},
     )
 
-    scrape() >> upload() >> move_file_from_s3 >> transform_and_test
+    scrape() >> validate() >> upload() >> move_file_from_s3 >> transform_and_test
 
 main_dag()
