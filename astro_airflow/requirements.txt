@@ -3,9 +3,10 @@ astronomer-cosmos
 apache-airflow-providers-snowflake
 dbt-snowflake
 
-# for scraper.py and uploader.py module
+# for modules
 bs4
 selenium
 webdriver-manager
 pandas
 boto3
+pydantic
