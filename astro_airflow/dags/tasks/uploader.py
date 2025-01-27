@@ -1,5 +1,4 @@
 import boto3
-import os
 
 def get_bucket_name() -> str:
     """
@@ -24,7 +23,7 @@ def upload_to_s3(bucket_name: str, file_name: str, path: str) -> None:
     except Exception as e:
         raise Exception(f'Failed to upload {file_name} to a S3 bucket, because of an error: {e}')
 
-if __name__ == '__main__':
+def uploader():
     bucket_name = get_bucket_name()
     upload_to_s3(
         bucket_name = bucket_name,
