@@ -11,7 +11,7 @@ Pipeline that extracts data from [Ultimate Tennis Statistics](https://www.ultima
 
 ![img](imgs/Tennis_Pipeline.drawio.png)
 
-Infrastructure provisioning through Terraform, containerized through Docker and orchestrated through Airflow. Created dashboard through Metabase.
+Infrastructure provisioning through Terraform, containerized through Docker and orchestrated through Airflow. Created dashboard through Power BI.
 
 ### Prerequisites
 
@@ -47,3 +47,5 @@ Infrastructure provisioning through Terraform, containerized through Docker and 
 ### Lessons Learned
 
 ### Contact
+
+Please feel free to contact me if you have any questions at [Linkedin](https://www.linkedin.com/in/kkborowy/) or email me at [kkborowy@gmail.com](mailto:kkborowy@gmail.com)! c:
