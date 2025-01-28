@@ -9,7 +9,7 @@ Pipeline that extracts data from [Ultimate Tennis Statistics](https://www.ultima
 
 ### Architecture
 
-[img]
+![img](imgs/Tennis_Pipeline.drawio.png)
 
 Infrastructure provisioning through Terraform, containerized through Docker and orchestrated through Airflow. Created dashboard through Metabase.
 
