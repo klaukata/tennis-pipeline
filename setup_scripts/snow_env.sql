@@ -8,7 +8,6 @@ grant role sysadmin to role customrole;
 grant role customrole to role accountadmin;
 grant create integration on account to role customrole;
 grant usage on warehouse wh to role customrole;
--- grant CREATE STAGE on all schemas in database DB to role CUSTOMROLE;
 
 use role customrole;
 use warehouse WH;
