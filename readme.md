@@ -11,7 +11,7 @@ Pipeline that extracts data from [Ultimate Tennis Statistics](https://www.ultima
 
 ![img](imgs/Tennis_Pipeline.drawio.png)
 
-Infrastructure provisioning through Terraform, containerized through Docker and orchestrated through Airflow. Created dashboard through Power BI.
+Infrastructure was provisioned using Terraform, containerized with Docker, and orchestrated via Airflow. The Astronomer Cosmos package was utilized to simplify building dbt models and tests as Airflow tasks. A dashboard was created using Power BI.
 
 ### Prerequisites
 
