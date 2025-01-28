@@ -44,7 +44,27 @@ Infrastructure provisioning through Terraform, containerized through Docker and 
 
 10. Run *main_dag* inside the Airflow UI.
 
-### Lessons Learned
+### Lessons Learned 
+
+During the development of this ELT project, I gained several valuable insights:  
+
+1. **Overriding Terraform Resources with Remote State**  
+    I learned how to effectively override Terraform resources using a remote state. This was essential because the project required creating AWS resources first, followed by Snowflake resources. The Snowflake configurations depended on properties from AWS resources, and the IAM trust policy needed attributes from the integration that was only available after policy creation. Without remote state management, this would have led to a continuous dependency cycle.  
+
+2. **The Importance of Data Validation**  
+   Validating data is a critical step in the data lifecycle. It ensures errors in the dataset are identified early, reducing debugging time and minimizing unnecessary cloud processing costs.
+
+3. **Using Docker Volumes for Confidential Files**  
+   I discovered that Docker volumes provide a secure way to manage confidential files within containers.
+
+**What I Would Do Differently:**  
+
+1. **Considering Redshift Instead of Snowflake**  
+    Redshift could have been a more cost-effective solution and potentially easier to integrate. With Snowflake, I had to create additional resources such as storage integrations and a stage. However, I opted for Snowflake due to its more generous free trial period.  
+
+2. **Improving Environment Variable Management**  
+   The method I used for loading environment variables, the `export $(cat vars.env | xargs)` command, posed limitations due to its temporary scope and potential security risks.
+
 
 ### Contact
 
