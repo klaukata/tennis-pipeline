@@ -1,6 +1,6 @@
 # Tennis Statistics End-To-End ELT Pipeline
 
-A weekly scheduled ELT pipeline that scrapes data from [Ultimate Tennis Statistics](https://www.ultimatetennisstatistics.com/) on the top male tennis players of all time, validates it, and uploads it to an S3 data lake. The pipeline then transforms the data in a Snowflake database, preparing it for analysis, machine learning, or other downstream applications.
+A weekly scheduled ELT pipeline that scrapes data from [Ultimate Tennis Statistics](https://www.ultimatetennisstatistics.com/) on the top male tennis players of all time, validates it, and uploads it to a S3 data lake. The pipeline then transforms the data in a Snowflake database, preparing it for analysis, machine learning, or other downstream applications.
 
 ## Data Visualization
 
