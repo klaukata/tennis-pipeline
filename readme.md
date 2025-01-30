@@ -6,6 +6,7 @@ Pipeline that extracts data from [Ultimate Tennis Statistics](https://www.ultima
 
 ### Data Visualization
 
+![Power BI Dashboard](imgs/dashboard.png)
 
 ### Architecture
 
@@ -15,6 +16,7 @@ Infrastructure was provisioned using Terraform, containerized with Docker, and o
 
 ### Prerequisites
 
+- Unix-like system or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
 - [AWS CLI](https://aws.amazon.com/cli/)
 - [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli/installation/installation)
 - [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli/), required for DBT Core and Airflow integration
