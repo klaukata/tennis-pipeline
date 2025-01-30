@@ -1,20 +1,20 @@
-##  Ultimate Tennis Statistics End-To-End ELT Pipeline
+#  Ultimate Tennis Statistics End-To-End ELT Pipeline
 
 Pipeline that extracts data from [Ultimate Tennis Statistics](https://www.ultimatetennisstatistics.com/) Player database and transforms it for a Power BI Dashboard.
 
-### Overview
+## Overview
 
-### Data Visualization
+## Data Visualization
 
 ![Power BI Dashboard](imgs/dashboard.png)
 
-### Architecture
+## Architecture
 
 ![img](imgs/Tennis_Pipeline.drawio.png)
 
 Infrastructure was provisioned using Terraform, containerized with Docker, and orchestrated via Airflow. The Astronomer Cosmos package was utilized to simplify building dbt models and tests as Airflow tasks. A dashboard was created using Power BI.
 
-### Prerequisites
+## Prerequisites
 
 - Unix-like system or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
 - [AWS CLI](https://aws.amazon.com/cli/)
@@ -24,7 +24,7 @@ Infrastructure was provisioned using Terraform, containerized with Docker, and o
 - [Docker](https://www.docker.com/), required to run the pipeline in Airflow
 - Installed packages from `/requirements.txt`
 
-### How to Run This Project
+## How to Run This Project
 
 1. Run `make aws` (enter your access keys and region name).
     
@@ -46,7 +46,7 @@ Infrastructure was provisioned using Terraform, containerized with Docker, and o
 
 10. Run *main_dag* inside the Airflow UI.
 
-### Lessons Learned 
+## Lessons Learned 
 
 During the development of this ELT project, I gained several valuable insights:  
 
@@ -59,7 +59,7 @@ During the development of this ELT project, I gained several valuable insights:
 3. **Using Docker Volumes for Confidential Files**  
    I discovered that Docker volumes provide a secure way to manage confidential files within containers.
 
-**What I Would Do Differently:**  
+What I Would Do Differently:  
 
 1. **Considering Redshift Instead of Snowflake**  
     Redshift could have been a more cost-effective solution and potentially easier to integrate. With Snowflake, I had to create additional resources such as storage integrations and a stage. However, I opted for Snowflake due to its more generous free trial period.  
@@ -68,6 +68,6 @@ During the development of this ELT project, I gained several valuable insights:
    The method I used for loading environment variables, the `export $(cat vars.env | xargs)` command, posed limitations due to its temporary scope and potential security risks.
 
 
-### Contact
+## Contact
 
 Please feel free to contact me if you have any questions at [Linkedin](https://www.linkedin.com/in/kkborowy/) or email me at [kkborowy@gmail.com](mailto:kkborowy@gmail.com)! c:
